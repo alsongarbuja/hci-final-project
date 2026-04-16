@@ -1,110 +1,86 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+// import { motion } from 'framer-motion';
+import { Icon } from "@iconify/react";
+import { countries } from "../../utils/lesson";
 
-const lessons = [
-  {
-    id: "intro",
-    name: "Landmarks",
-    icon: "🏛️",
-    color: "bg-emerald-500",
-    shadow: "shadow-[0_6px_0_0_rgba(5,150,105,1)]",
-    unlocked: true,
-  },
-  {
-    id: "nepal",
-    name: "Nepal",
-    icon: "🏔️",
-    color: "bg-sky-500",
-    shadow: "shadow-[0_6px_0_0_rgba(14,165,233,1)]",
-    unlocked: true,
-  },
-  {
-    id: "culture",
-    name: "Festivals",
-    icon: "🏮",
-    color: "bg-orange-400",
-    shadow: "shadow-[0_6px_0_0_rgba(251,146,60,1)]",
-    unlocked: false,
-  },
-  {
-    id: "flags",
-    name: "Flags",
-    icon: "🚩",
-    color: "bg-rose-500",
-    shadow: "shadow-[0_6px_0_0_rgba(225,29,72,1)]",
-    unlocked: false,
-  },
-];
+const CourseMap: React.FC = () => {
+  const { countryId } = useParams();
+  const country = countries.find((v) => v.id === countryId);
 
-const RoadMap: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white pb-20">
-      <nav className="sticky top-0 z-50 bg-white border-b-2 border-slate-200 px-6 py-4">
-        <div className="max-w-2xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <Link
-              to="/"
-              className="text-slate-400 hover:text-slate-600 font-bold"
-            >
-              ← BACK
-            </Link>
-            <div className="flex items-center gap-2">
-              <span className="text-orange-500 font-black">🔥 7</span>
-              <span className="text-rose-500 font-black">❤️ 5</span>
-              <span className="text-sky-500 font-black">💎 120</span>
-            </div>
+    <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 pb-24">
+      <nav className="sticky top-0 z-50 bg-white border-b-2 border-slate-200 px-6 py-4 flex justify-between items-center">
+        <Link to="/" className="text-slate-400 font-black hover:text-slate-600">
+          <Icon icon="lucide:arrow-left" className="text-xl" />
+        </Link>
+        <div className="flex gap-6 items-center">
+          <div className="flex items-center gap-2 font-black text-orange-500">
+            <Icon icon="lucide:flame" /> 12
+          </div>
+          <div className="flex items-center gap-2 font-black text-rose-500">
+            <Icon icon="twemoji:red-heart" /> 5
           </div>
         </div>
+        <div className="w-8" /> {/* Spacer */}
       </nav>
 
-      <div className="max-w-md mx-auto pt-12 flex flex-col items-center gap-12">
-        <div className="text-center mb-4">
-          <h1 className="text-2xl font-black text-slate-700 uppercase tracking-wide">
-            Unit 1: Asia & Peaks
+      {/* Path Layout */}
+      <div className="max-w-md mx-auto pt-10 flex flex-col items-center">
+        <header className="text-center mb-12 px-6">
+          <h1 className="text-3xl font-black text-slate-700 leading-tight uppercase">
+            Discover {country?.name}
           </h1>
-          <p className="text-slate-500 font-bold">
-            Discover the roof of the world
-          </p>
-        </div>
+          <p className="text-slate-500 font-bold mt-2">{country?.tagline}</p>
+        </header>
 
-        {lessons.map((lesson, index) => (
-          <motion.div
-            key={lesson.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className={`relative ${index % 2 === 0 ? "right-8" : "left-8"}`}
-          >
-            {lesson.unlocked ? (
-              <Link
-                to={`/lesson/${lesson.id}`}
-                className="flex flex-col items-center group"
-              >
-                <div
-                  className={`w-24 h-24 ${lesson.color} ${lesson.shadow} rounded-full flex items-center justify-center text-4xl group-active:shadow-none group-active:translate-y-1 transition-all`}
+        {country?.lessons.map((lesson, index) => {
+          // Creates a zig-zag curve
+          const xPos = index % 2 === 0 ? (index % 4 === 0 ? 40 : -40) : 0;
+
+          return (
+            <div
+              key={lesson.id}
+              className="relative mb-10"
+              style={{ transform: `translateX(${xPos}px)` }}
+            >
+              <div className="flex flex-col items-center">
+                {lesson.unlocked ? (
+                  <Link
+                    to={`/lesson/${lesson.id}`}
+                    className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl text-white ${lesson.color} ${lesson.shadow} active:translate-y-1 active:shadow-none transition-all`}
+                  >
+                    <Icon icon={lesson.icon} className="text-white text-4xl" />
+                  </Link>
+                ) : (
+                  <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl bg-slate-200 shadow-[0_6px_0_0_rgba(203,213,225,1)] grayscale opacity-60">
+                    <Icon icon="lucide:lock" className="text-slate-400" />
+                  </div>
+                )}
+
+                <span
+                  className={`mt-4 font-black uppercase tracking-widest text-xs ${lesson.unlocked ? "text-slate-700" : "text-slate-300"}`}
                 >
-                  {lesson.icon}
-                </div>
-                <span className="mt-4 font-black text-slate-700 uppercase tracking-tighter">
-                  {lesson.name}
-                </span>
-              </Link>
-            ) : (
-              <div className="flex flex-col items-center opacity-40 grayscale cursor-not-allowed">
-                <div className="w-24 h-24 bg-slate-300 shadow-[0_6px_0_0_rgba(203,213,225,1)] rounded-full flex items-center justify-center text-4xl">
-                  🔒
-                </div>
-                <span className="mt-4 font-black text-slate-700 uppercase tracking-tighter">
                   {lesson.name}
                 </span>
               </div>
-            )}
-          </motion.div>
-        ))}
+
+              {index < country?.lessons.length - 1 && (
+                <div className="absolute top-32 left-1/2 -translate-x-1/2 flex flex-col gap-2">
+                  {[1, 2, 3].map((i) => (
+                    <div
+                      key={i}
+                      className="w-2 h-2 rounded-full bg-slate-100"
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
 
-export default RoadMap;
+export default CourseMap;

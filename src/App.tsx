@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/quiz" element={<MapQuiz />} />
-        <Route path="/lessons/:country" element={<RoadMap />} />
+        <Route path="/lessons/:countryId" element={<RoadMap />} />
       </Routes>
     </Router>
   );
