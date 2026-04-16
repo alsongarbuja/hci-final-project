@@ -2,6 +2,7 @@ export const countries = [
   {
     id: "nepal",
     name: "Nepal",
+    continent: "Asia",
     tagline: "Master the details of the Himalayan Nation",
     lessons: [
       {
@@ -842,12 +843,14 @@ export const countries = [
   {
     id: "usa",
     name: "USA",
+    continent: "Americas",
     tagline: "The largest country",
     lessons: [],
   },
   {
     id: "japan",
     name: "Japan",
+    continent: "Asia",
     tagline: "Land of rising sun",
     lessons: [],
   },

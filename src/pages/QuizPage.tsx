@@ -69,7 +69,7 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans overflow-hidden">
-      <header className="max-w-4xl mx-auto w-full px-6 py-8 flex items-center gap-6">
+      <header className="max-w-4xl mx-auto w-full px-6 py-6 flex items-center gap-6">
         <button
           onClick={() => navigate(-1)}
           className="text-slate-400 hover:text-slate-600"
@@ -88,7 +88,7 @@ const QuizPage: React.FC = () => {
         </div>
       </header>
 
-      <main className="grow max-w-2xl mx-auto w-full px-6 py-8 flex flex-col">
+      <main className="grow max-w-2xl mx-auto w-full px-6 py-4 flex flex-col">
         {/* Mascot Area */}
         <div className="flex items-start gap-4 mb-8">
           <motion.div

@@ -80,7 +80,7 @@ const Header: React.FC = () => {
 
                       <div className="border-t-2 border-slate-100 mt-2 pt-2">
                         <Link
-                          to="/courses"
+                          to="/lessons"
                           onClick={() => setIsDropdownOpen(false)}
                           className="flex items-center justify-center p-3 w-full text-sky-500 font-black text-xs uppercase tracking-widest hover:bg-sky-50 transition-colors rounded-xl"
                         >

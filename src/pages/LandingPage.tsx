@@ -9,20 +9,31 @@ const LandingPage: React.FC = () => {
       <Header />
 
       <main className="w-full max-w-300 mx-auto px-6 py-12 md:py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="flex justify-center"
-        >
+        <div className="flex justify-center">
           <div className="relative w-64 h-64 md:w-96 md:h-96 bg-sky-100 rounded-full flex items-center justify-center border-4 border-sky-200 shadow-inner">
-            <span className="text-9xl animate-bounce">🌍</span>
+            <motion.div
+              initial={{ y: 0 }}
+              animate={{ y: [0, -20, 0] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="w-64 h-64 md:w-80 md:h-80 mx-auto drop-shadow-2xl"
+            >
+              <img
+                src="/mascot.png"
+                alt="Globe Mascot"
+                className="w-full h-full object-contain"
+              />
+            </motion.div>
             <div className="absolute -top-4 -right-4 bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-xl rotate-12">
               <p className="font-black text-slate-700 text-sm italic">
                 "Let's learn!"
               </p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
           <h1 className="text-4xl md:text-5xl font-black text-slate-700 leading-tight mb-8">

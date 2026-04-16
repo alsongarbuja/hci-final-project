@@ -5,6 +5,7 @@ import RoadMap from "./pages/lessons/RoadMap";
 import MapQuiz from "./pages/MapQuizPage";
 import LessonPage from "./pages/lessons/LessonPage";
 import QuizPage from "./pages/QuizPage";
+import LessonsListPage from "./pages/lessons/LessonsListPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/quiz" element={<MapQuiz />} />
+        <Route path="/lessons" element={<LessonsListPage />} />
         <Route path="/lessons/:countryId" element={<RoadMap />} />
         <Route path="/lessons/:countryId/:lessonId" element={<LessonPage />} />
         <Route
