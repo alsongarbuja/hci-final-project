@@ -11,23 +11,30 @@ const CourseMap: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 pb-24">
-      <nav className="sticky top-0 z-50 bg-white border-b-2 border-slate-200 px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="text-slate-400 font-black hover:text-slate-600">
-          <Icon icon="lucide:arrow-left" className="text-xl" />
-        </Link>
-        <div className="flex gap-6 items-center">
-          <div className="flex items-center gap-2 font-black text-orange-500">
-            <Icon icon="lucide:flame" /> {streak}
+      <header className="sticky top-0 z-50 bg-white border-b-2 border-slate-200">
+        <nav className="max-w-300 mx-auto py-4 flex justify-between items-center">
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-[0_4px_0_0_rgba(16,185,129,1)] group-active:shadow-none group-active:translate-y-1 transition-all">
+              <span className="text-white text-2xl font-black">G</span>
+            </div>
+            <span className="text-2xl font-black tracking-tight text-emerald-500">
+              geoquest
+            </span>
+          </Link>
+          <div className="flex w-full gap-6 items-center justify-end">
+            <div className="flex items-center gap-2 font-black text-orange-500">
+              <Icon icon="lucide:flame" /> {streak}
+            </div>
+            <div className="flex items-center gap-2 font-black text-yellow-500">
+              <Icon icon="carbon:growth" /> {xp}
+            </div>
+            <div className="flex items-center gap-2 font-black text-rose-500">
+              <Icon icon="twemoji:red-heart" /> {hearts}
+            </div>
           </div>
-          <div className="flex items-center gap-2 font-black text-yellow-500">
-            <Icon icon="carbon:growth" /> {xp}
-          </div>
-          <div className="flex items-center gap-2 font-black text-rose-500">
-            <Icon icon="twemoji:red-heart" /> {hearts}
-          </div>
-        </div>
-        <div className="w-8" />
-      </nav>
+          <div className="w-8" />
+        </nav>
+      </header>
 
       <div className="max-w-md mx-auto pt-10 flex flex-col items-center">
         <header className="text-center mb-12 px-6">
