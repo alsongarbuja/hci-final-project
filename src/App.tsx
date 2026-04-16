@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import QuizPage from "./pages/QuizPage";
+// import QuizPage from "./pages/QuizPage";
 import RoadMap from "./pages/lessons/RoadMap";
 import MapQuiz from "./pages/MapQuizPage";
+import LessonPage from "./pages/lessons/LessonPage";
+import QuizPage from "./pages/QuizPage";
 
 function App() {
   return (
@@ -11,6 +13,11 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/quiz" element={<MapQuiz />} />
         <Route path="/lessons/:countryId" element={<RoadMap />} />
+        <Route path="/lessons/:countryId/:lessonId" element={<LessonPage />} />
+        <Route
+          path="/lessons/:countryId/:lessonId/quiz"
+          element={<QuizPage />}
+        />
       </Routes>
     </Router>
   );

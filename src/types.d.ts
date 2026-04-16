@@ -14,3 +14,11 @@ interface GeoProperties {
   name: string;
   [key: string]: unknown;
 }
+
+interface LessonStep {
+  type: "fact" | "image" | "stat";
+  title: string;
+  content: string;
+  illustration: string; // Iconify string or Emoji
+  accentColor: string;
+}

@@ -1,153 +1,414 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import MapChart from "../components/MapChart";
-const questions: Question[] = [
-  {
-    id: 1,
-    country: "Brazil",
-    clue: "The largest country in South America, known for its iconic Carnival.",
-    flag: "🇧🇷",
-  },
-  {
-    id: 2,
-    country: "Japan",
-    clue: "An archipelago nation blending ancient traditions with neon skyscrapers.",
-    flag: "🇯🇵",
-  },
-];
+import { Icon } from "@iconify/react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useStore } from "../store/useStore";
+import { countries } from "../utils/lesson";
 
 const QuizPage: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [feedback, setFeedback] = useState<Feedback | null>(null);
-  const [score, setScore] = useState(0);
+  const navigate = useNavigate();
+  const { countryId, lessonId } = useParams();
+  const { hearts, loseHeart, updateScore, completeLesson } = useStore();
 
-  const currentQ = questions[currentIndex];
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-  const handleCountryClick = (name: string) => {
-    if (name === currentQ.country) {
-      setFeedback({ type: "success", text: "TARGET LOCATED" });
-      setScore((s) => s + 100);
-      setTimeout(() => {
-        setFeedback(null);
-        setCurrentIndex((prev) => (prev + 1) % questions.length);
-      }, 1500);
+  const countrySelection = countries.find((c) => c.id === countryId);
+  const lessonsArray = countrySelection?.lessons || [];
+  const quizQuestions = lessonsArray.find((l) => l.id === lessonId)?.quiz || [];
+
+  const currentQ = quizQuestions[currentIdx];
+  const progress = ((currentIdx + 1) / quizQuestions.length) * 100;
+
+  const handleNext = () => {
+    if (currentIdx < quizQuestions.length - 1) {
+      setCurrentIdx((prev) => prev + 1);
+      setSelectedOption(null);
+      setIsChecked(false);
+      setIsCorrect(null);
     } else {
-      setFeedback({ type: "error", text: `IDENTIFIED: ${name.toUpperCase()}` });
-      setTimeout(() => setFeedback(null), 1500);
+      // 2. Find NEXT lesson ID
+      const currentIndex = lessonsArray.findIndex((l) => l.id === lessonId);
+      const nextLesson = lessonsArray[currentIndex + 1];
+
+      // If there is a next lesson, unlock it. Otherwise, stay on current.
+      const idToUnlock = nextLesson ? nextLesson.id : lessonId;
+
+      completeLesson(countryId!, idToUnlock!);
+      updateScore(countryId!, lessonId!, currentScore);
+      navigate(`/lessons/${countryId}`);
+    }
+  };
+
+  useEffect(() => {
+    if (isChecked) {
+      const timer = setTimeout(() => {
+        handleNext();
+      }, 1800); // 1.8s delay to show the animation/feedback
+      return () => clearTimeout(timer);
+    }
+  }, [isChecked]);
+
+  const handleCheck = () => {
+    const selected = currentQ?.options.find((opt) => opt.id === selectedOption);
+    const correct = selected?.isCorrect || false;
+
+    setIsCorrect(correct);
+    setIsChecked(true);
+
+    if (correct) {
+      // 1. Update score state
+      setCurrentScore((prev) => prev + 10);
+    } else {
+      loseHeart();
     }
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#020617] text-white p-6 md:p-12 overflow-x-hidden">
-      {/* HUD Header */}
-      <header className="w-full flex justify-between items-center mb-12">
-        <div className="flex flex-col">
-          <span className="text-blue-500 text-[10px] font-black tracking-[0.3em] uppercase">
-            Mission Status
-          </span>
-          <h2 className="text-2xl font-black tracking-tighter">GLOBAL RECON</h2>
+    <div className="min-h-screen bg-white flex flex-col font-sans overflow-hidden">
+      <header className="max-w-4xl mx-auto w-full px-6 py-8 flex items-center gap-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="text-slate-400 hover:text-slate-600"
+        >
+          <Icon icon="lucide:x" className="text-3xl" />
+        </button>
+        <div className="grow h-4 bg-slate-100 rounded-full border-2 border-slate-100 overflow-hidden">
+          <motion.div
+            className="h-full bg-emerald-500"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+          />
         </div>
-
-        <div className="flex gap-4">
-          <div className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
-            <span className="text-slate-500 text-[10px] block font-bold uppercase tracking-widest">
-              XP Score
-            </span>
-            <span className="text-xl font-mono font-bold text-blue-400">
-              {score.toLocaleString()}
-            </span>
-          </div>
+        <div className="flex items-center gap-2 font-black text-rose-500 text-xl">
+          <Icon icon="twemoji:red-heart" /> {hearts}
         </div>
       </header>
 
-      <main className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Clue Card (Bento Style) */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
+      <main className="grow max-w-2xl mx-auto w-full px-6 py-8 flex flex-col">
+        {/* Mascot Area */}
+        <div className="flex items-start gap-4 mb-8">
           <motion.div
-            key={currentQ.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="p-8 rounded-[2.5rem] bg-linear-to-br from-blue-600 to-indigo-700 border border-white/10 shadow-2xl relative overflow-hidden group"
+            animate={
+              isChecked
+                ? {
+                    scale: [1, 1.2, 1],
+                    rotate: isCorrect ? [0, 10, -10, 0] : [0, -10, 10, 0],
+                  }
+                : {}
+            }
+            className="w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center shrink-0"
           >
-            <span className="text-8xl mb-6 block">{currentQ.flag}</span>
-            <h3 className="text-xs font-black text-blue-200 uppercase tracking-[0.2em] mb-4">
-              Objective Clue
-            </h3>
-            <p className="text-2xl font-bold leading-tight text-white mb-8">
-              "{currentQ.clue}"
-            </p>
-            <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-white"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 10, ease: "linear" }}
-              />
-            </div>
+            <Icon
+              icon={
+                isChecked
+                  ? isCorrect
+                    ? "twemoji:party-popper"
+                    : "twemoji:disappointed-face"
+                  : "twemoji:owl"
+              }
+              className="text-4xl"
+            />
           </motion.div>
-
-          <div className="p-8 rounded-[2.5rem] bg-white/3 border border-white/5 grow">
-            <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-4">
-              Tactical Data
-            </h4>
-            <div className="space-y-4">
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-sm text-slate-400">Continent</span>
-                <span className="text-sm font-bold italic">Analyzing...</span>
-              </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-sm text-slate-400">Precision</span>
-                <span className="text-sm font-bold text-green-400">High</span>
-              </div>
-            </div>
+          <div className="bg-white border-2 border-slate-200 p-4 rounded-2xl rounded-tl-none relative shadow-sm">
+            <p className="font-bold text-slate-600 leading-tight">
+              {isChecked
+                ? isCorrect
+                  ? "Spot on! You're a natural."
+                  : "Oh no! Let's keep going."
+                : currentQ?.mascotComment}
+            </p>
           </div>
         </div>
 
-        {/* Right Column: The Map */}
-        <div className="lg:col-span-8 relative">
-          <MapChart onCountryClick={handleCountryClick} />
+        <h2 className="text-2xl font-black text-slate-700 mb-8">
+          {currentQ?.question}
+        </h2>
 
-          {/* Feedback Overlay */}
-          <AnimatePresence>
-            {feedback && (
-              <motion.div
-                initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 z-20 flex items-center justify-center rounded-[2.5rem] bg-black/20"
-              >
-                <motion.div
-                  initial={{ scale: 0.9, y: 20 }}
-                  animate={{ scale: 1, y: 0 }}
-                  className={`px-12 py-6 rounded-3xl border ${
-                    feedback.type === "success"
-                      ? "bg-green-500 border-green-400 shadow-[0_0_50px_-12px_rgba(34,197,94,0.5)]"
-                      : "bg-red-500 border-red-400 shadow-[0_0_50px_-12px_rgba(239,68,68,0.5)]"
-                  }`}
+        <div className="grid grid-cols-1 gap-4">
+          <AnimatePresence mode="wait">
+            {currentQ?.options.map((option) => {
+              const isChosen = selectedOption === option.id;
+              return (
+                <motion.button
+                  key={option.id}
+                  disabled={isChecked}
+                  onClick={() => setSelectedOption(option.id)}
+                  // 3. Shiver animation for wrong answer, Bounce for correct
+                  animate={
+                    isChecked && isChosen
+                      ? isCorrect
+                        ? { y: [0, -10, 0] }
+                        : { x: [-10, 10, -10, 10, 0] }
+                      : {}
+                  }
+                  className={`
+                    flex items-center gap-4 p-4 rounded-2xl border-2 font-bold text-lg transition-all
+                    ${isChosen ? "border-sky-400 bg-sky-50 text-sky-600 shadow-[0_4px_0_0_rgba(14,165,233,1)]" : "border-slate-200 text-slate-600 shadow-[0_4px_0_0_rgba(226,232,240,1)]"}
+                    ${isChecked && option.isCorrect ? "border-emerald-500 bg-emerald-50 text-emerald-600 shadow-[0_4px_0_0_rgba(16,185,129,1)]" : ""}
+                    ${isChecked && isChosen && !option.isCorrect ? "border-rose-500 bg-rose-50 text-rose-600 shadow-[0_4px_0_0_rgba(225,29,72,1)]" : ""}
+                  `}
                 >
-                  <p className="text-white font-black text-2xl tracking-tighter">
-                    {feedback.text}
-                  </p>
-                </motion.div>
-              </motion.div>
-            )}
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white border-2 border-inherit">
+                    <Icon icon={option.icon} className="text-2xl" />
+                  </div>
+                  {option.text}
+                </motion.button>
+              );
+            })}
           </AnimatePresence>
         </div>
       </main>
 
-      {/* Footer Nav */}
-      <footer className="mt-12 flex gap-4 text-[10px] font-bold text-slate-600 uppercase tracking-[.3em]">
-        <span>System V3.0</span>
-        <span>•</span>
-        <button
-          onClick={() => window.history.back()}
-          className="hover:text-white transition-colors"
-        >
-          Abort Mission
-        </button>
+      {/* Footer stays white/check-focused, but changes for feedback */}
+      <footer
+        className={`border-t-2 p-6 md:p-10 transition-colors duration-300 ${!isChecked ? "bg-white" : isCorrect ? "bg-emerald-100" : "bg-rose-100"}`}
+      >
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 min-h-20">
+            {isChecked && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-4"
+              >
+                <Icon
+                  icon={
+                    isCorrect ? "lucide:check-circle" : "lucide:alert-circle"
+                  }
+                  className={`text-5xl ${isCorrect ? "text-emerald-500" : "text-rose-500"}`}
+                />
+                <div>
+                  <h3
+                    className={`text-2xl font-black ${isCorrect ? "text-emerald-700" : "text-rose-700"}`}
+                  >
+                    {isCorrect ? "Excellent!" : "Correct solution:"}
+                  </h3>
+                  <p
+                    className={`font-bold ${isCorrect ? "text-emerald-600" : "text-rose-600"}`}
+                  >
+                    {isCorrect
+                      ? currentQ?.explanation
+                      : currentQ?.options.find((o) => o.isCorrect)?.text}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          <div className="w-full md:w-auto">
+            <button
+              disabled={!selectedOption || isChecked}
+              onClick={handleCheck}
+              className={`w-full md:w-auto px-16 py-4 rounded-2xl font-black text-lg uppercase tracking-widest transition-all ${
+                selectedOption && !isChecked
+                  ? "bg-emerald-500 text-white shadow-[0_5px_0_0_rgba(5,150,105,1)] active:translate-y-1"
+                  : "bg-slate-200 text-slate-400 cursor-not-allowed"
+              }`}
+            >
+              {isChecked ? "Processing..." : "Check"}
+            </button>
+          </div>
+        </div>
       </footer>
     </div>
   );
 };
 
 export default QuizPage;
+// import React, { useState } from "react";
+// import { motion } from "framer-motion";
+// import { Icon } from "@iconify/react";
+// import { useNavigate, useParams } from "react-router-dom";
+// import { useStore } from "../store/useStore";
+// import { countries } from "../utils/lesson";
+
+// const QuizPage: React.FC = () => {
+//   const navigate = useNavigate();
+//   const { countryId, lessonId } = useParams();
+//   const { hearts, loseHeart, updateScore, completeLesson } = useStore();
+
+//   const [currentIdx, setCurrentIdx] = useState(0);
+//   const [currentScore, setCurrentScore] = useState(0);
+//   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+//   const [isChecked, setIsChecked] = useState(false);
+//   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+//   const countrySelection = countries.find((c) => c.id === countryId);
+//   const quizQuestions = countrySelection?.lessons?.find(
+//     (l) => l.id === lessonId,
+//   )?.quiz;
+
+//   const currentQ = quizQuestions?.[currentIdx];
+//   const progress = ((currentIdx + 1) / quizQuestions!.length) * 100;
+
+//   const handleCheck = () => {
+//     const selected = currentQ?.options.find((opt) => opt.id === selectedOption);
+//     const correct = selected?.isCorrect || false;
+
+//     setIsCorrect(correct);
+//     setIsChecked(true);
+
+//     if (!correct) {
+//       loseHeart();
+//     }
+//   };
+
+//   const handleNext = () => {
+//     if (currentIdx < quizQuestions!.length - 1) {
+//       setCurrentIdx((prev) => prev + 1);
+//       setSelectedOption(null);
+//       setIsChecked(false);
+//       setIsCorrect(null);
+//     } else {
+//       completeLesson(countryId!, lessonId!);
+//       updateScore(countryId!, lessonId!, currentScore);
+//       navigate(`/lessons/${countryId}`);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-white flex flex-col font-sans overflow-hidden">
+//       {/* 1. Header: Progress & Hearts */}
+//       <header className="max-w-4xl mx-auto w-full px-6 py-8 flex items-center gap-6">
+//         <button
+//           onClick={() => navigate(-1)}
+//           className="text-slate-400 hover:text-slate-600"
+//         >
+//           <Icon icon="lucide:x" className="text-3xl" />
+//         </button>
+//         <div className="grow h-4 bg-slate-100 rounded-full border-2 border-slate-100 overflow-hidden">
+//           <motion.div
+//             className="h-full bg-emerald-500"
+//             initial={{ width: 0 }}
+//             animate={{ width: `${progress}%` }}
+//           />
+//         </div>
+//         <div className="flex items-center gap-2 font-black text-rose-500 text-xl">
+//           <Icon icon="twemoji:red-heart" /> {hearts}
+//         </div>
+//       </header>
+
+//       {/* 2. Question Area */}
+//       <main className="grow max-w-2xl mx-auto w-full px-6 py-8 flex flex-col">
+//         <div className="flex items-start gap-4 mb-8">
+//           <div className="w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center shrink-0">
+//             <Icon icon="twemoji:owl" className="text-4xl" /> {/* Mascot Icon */}
+//           </div>
+//           <div className="bg-white border-2 border-slate-200 p-4 rounded-2xl rounded-tl-none relative shadow-sm">
+//             <p className="font-bold text-slate-600 leading-tight">
+//               {currentQ?.mascotComment}
+//             </p>
+//             {/* Tooltip triangle */}
+//             <div className="absolute -top-0.5 -left-2.5 w-0 h-0 border-t-10 border-t-transparent border-r-12 border-r-slate-200 border-b-10 border-b-transparent"></div>
+//           </div>
+//         </div>
+
+//         <h2 className="text-2xl font-black text-slate-700 mb-8">
+//           {currentQ?.question}
+//         </h2>
+
+//         {/* Options Grid */}
+//         <div className="grid grid-cols-1 gap-4">
+//           {currentQ?.options.map((option) => (
+//             <button
+//               key={option.id}
+//               disabled={isChecked}
+//               onClick={() => setSelectedOption(option.id)}
+//               className={`
+//                 flex items-center gap-4 p-4 rounded-2xl border-2 font-bold text-lg transition-all
+//                 ${
+//                   selectedOption === option.id
+//                     ? "border-sky-400 bg-sky-50 text-sky-600 shadow-[0_4px_0_0_rgba(14,165,233,1)]"
+//                     : "border-slate-200 hover:bg-slate-50 text-slate-600 shadow-[0_4px_0_0_rgba(226,232,240,1)]"
+//                 }
+//                 ${isChecked && option.isCorrect ? "border-emerald-500 bg-emerald-50 text-emerald-600 shadow-[0_4px_0_0_rgba(16,185,129,1)]" : ""}
+//                 ${isChecked && selectedOption === option.id && !option.isCorrect ? "border-rose-500 bg-rose-50 text-rose-600 shadow-[0_4px_0_0_rgba(225,29,72,1)]" : ""}
+//               `}
+//             >
+//               <div
+//                 className={`w-10 h-10 rounded-lg flex items-center justify-center bg-white border-2 border-inherit`}
+//               >
+//                 <Icon icon={option.icon} className="text-2xl" />
+//               </div>
+//               {option.text}
+//             </button>
+//           ))}
+//         </div>
+//       </main>
+
+//       {/* 3. Feedback Footer Bar */}
+//       <footer
+//         className={`
+//         border-t-2 p-6 md:p-10 transition-colors duration-300
+//         ${!isChecked ? "bg-white border-slate-200" : isCorrect ? "bg-emerald-100 border-emerald-200" : "bg-rose-100 border-rose-200"}
+//       `}
+//       >
+//         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+//           <div className="flex items-center gap-4">
+//             {isChecked && (
+//               <>
+//                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm">
+//                   <Icon
+//                     icon={
+//                       isCorrect ? "lucide:check-circle" : "lucide:alert-circle"
+//                     }
+//                     className={`text-4xl ${isCorrect ? "text-emerald-500" : "text-rose-500"}`}
+//                   />
+//                 </div>
+//                 <div>
+//                   <h3
+//                     className={`text-2xl font-black ${isCorrect ? "text-emerald-700" : "text-rose-700"}`}
+//                   >
+//                     {isCorrect ? "Excellent!" : "Correct solution:"}
+//                   </h3>
+//                   <p
+//                     className={`font-bold ${isCorrect ? "text-emerald-600" : "text-rose-600"}`}
+//                   >
+//                     {isCorrect
+//                       ? currentQ?.explanation
+//                       : currentQ?.options.find((o) => o.isCorrect)?.text}
+//                   </p>
+//                 </div>
+//               </>
+//             )}
+//           </div>
+
+//           <div className="w-full md:w-auto">
+//             {!isChecked ? (
+//               <button
+//                 onClick={handleCheck}
+//                 disabled={!selectedOption}
+//                 className={`
+//                   w-full md:w-auto px-16 py-4 rounded-2xl font-black text-lg uppercase tracking-widest transition-all
+//                   ${
+//                     selectedOption
+//                       ? "bg-emerald-500 text-white shadow-[0_5px_0_0_rgba(5,150,105,1)] active:shadow-none active:translate-y-1"
+//                       : "bg-slate-200 text-slate-400 cursor-not-allowed"
+//                   }
+//                 `}
+//               >
+//                 Check
+//               </button>
+//             ) : (
+//               <button
+//                 onClick={handleNext}
+//                 className={`
+//                   w-full md:w-auto px-16 py-4 text-white rounded-2xl font-black text-lg uppercase tracking-widest shadow-[0_5px_0_0_rgba(0,0,0,0.2)] active:shadow-none active:translate-y-1 transition-all
+//                   ${isCorrect ? "bg-emerald-500" : "bg-rose-500"}
+//                 `}
+//               >
+//                 Continue
+//               </button>
+//             )}
+//           </div>
+//         </div>
+//       </footer>
+//     </div>
+//   );
+// };
+
+// export default QuizPage;

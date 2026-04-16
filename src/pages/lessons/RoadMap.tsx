@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-// import { motion } from 'framer-motion';
 import { Icon } from "@iconify/react";
 import { countries } from "../../utils/lesson";
+import { useStore } from "../../store/useStore";
 
 const CourseMap: React.FC = () => {
   const { countryId } = useParams();
   const country = countries.find((v) => v.id === countryId);
+  const { unlockedLessons, xp, hearts, streak } = useStore();
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 pb-24">
@@ -16,16 +17,18 @@ const CourseMap: React.FC = () => {
         </Link>
         <div className="flex gap-6 items-center">
           <div className="flex items-center gap-2 font-black text-orange-500">
-            <Icon icon="lucide:flame" /> 12
+            <Icon icon="lucide:flame" /> {streak}
+          </div>
+          <div className="flex items-center gap-2 font-black text-yellow-500">
+            <Icon icon="carbon:growth" /> {xp}
           </div>
           <div className="flex items-center gap-2 font-black text-rose-500">
-            <Icon icon="twemoji:red-heart" /> 5
+            <Icon icon="twemoji:red-heart" /> {hearts}
           </div>
         </div>
-        <div className="w-8" /> {/* Spacer */}
+        <div className="w-8" />
       </nav>
 
-      {/* Path Layout */}
       <div className="max-w-md mx-auto pt-10 flex flex-col items-center">
         <header className="text-center mb-12 px-6">
           <h1 className="text-3xl font-black text-slate-700 leading-tight uppercase">
@@ -35,7 +38,6 @@ const CourseMap: React.FC = () => {
         </header>
 
         {country?.lessons.map((lesson, index) => {
-          // Creates a zig-zag curve
           const xPos = index % 2 === 0 ? (index % 4 === 0 ? 40 : -40) : 0;
 
           return (
@@ -45,9 +47,9 @@ const CourseMap: React.FC = () => {
               style={{ transform: `translateX(${xPos}px)` }}
             >
               <div className="flex flex-col items-center">
-                {lesson.unlocked ? (
+                {unlockedLessons[countryId!].includes(lesson.id) ? (
                   <Link
-                    to={`/lesson/${lesson.id}`}
+                    to={`${lesson.id}`}
                     className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl text-white ${lesson.color} ${lesson.shadow} active:translate-y-1 active:shadow-none transition-all`}
                   >
                     <Icon icon={lesson.icon} className="text-white text-4xl" />
@@ -59,7 +61,7 @@ const CourseMap: React.FC = () => {
                 )}
 
                 <span
-                  className={`mt-4 font-black uppercase tracking-widest text-xs ${lesson.unlocked ? "text-slate-700" : "text-slate-300"}`}
+                  className={`mt-4 font-black uppercase tracking-widest text-xs ${unlockedLessons[countryId!].includes(lesson.id) ? "text-slate-700" : "text-slate-300"}`}
                 >
                   {lesson.name}
                 </span>
