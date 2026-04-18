@@ -4,6 +4,7 @@ export const countries = [
     name: "Nepal",
     continent: "Asia",
     tagline: "Master the details of the Himalayan Nation",
+    stampIcon: "emojione:flag-for-nepal",
     lessons: [
       {
         id: "geo",
@@ -148,6 +149,21 @@ export const countries = [
               },
             ],
             explanation: "8 out of the 14 highest mountains are in Nepal!",
+          },
+          {
+            id: "q_order_1",
+            type: "order", // NEW TYPE
+            question: "Order these Himalayan peaks from Lowest to Highest",
+            mascotComment: "Drag them into the right spots!",
+            options: [
+              { id: "o1", text: "Mount Everest", value: 8848 },
+              { id: "o2", text: "Mount Kanchenjunga", value: 8586 },
+              { id: "o3", text: "Mount Annapurna", value: 8091 },
+            ],
+            // The correct order IDs
+            correctOrder: ["o3", "o2", "o1"],
+            explanation:
+              "Annapurna is the 10th highest, Kanchenjunga the 3rd, and Everest the 1st!",
           },
           {
             id: "q6",
@@ -845,6 +861,7 @@ export const countries = [
     name: "USA",
     continent: "Americas",
     tagline: "The largest country",
+    stampIcon: "emojione:flag-for-united-states",
     lessons: [],
   },
   {
@@ -852,6 +869,7 @@ export const countries = [
     name: "Japan",
     continent: "Asia",
     tagline: "Land of rising sun",
+    stampIcon: "emojione:flag-for-japan",
     lessons: [],
   },
 ];
