@@ -1,13 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { chapters, type NepalCategory } from "../../utils/lesson";
+import { useStore } from "../../store/useStore";
 
 const LessonPage: React.FC = () => {
   const { countryId, lessonId } = useParams();
+  const { recoverHearts } = useStore();
   const navigate = useNavigate();
-  const scrollRef = useRef<HTMLDivElement>(null);
+  // const scrollRef = useRef<HTMLDivElement>(null);
 
   const infos =
     chapters.find((v) => v.id === countryId)?.information[
@@ -18,23 +20,24 @@ const LessonPage: React.FC = () => {
   const currentStep = visibleSteps[visibleSteps.length - 1];
   const isLastStep = currentStep === infos.length - 1;
 
-  // Track the "active" icon based on scroll or current progress
   const activeIcon = infos[currentStep].illustration;
   const activeColor = infos[currentStep].accentColor;
 
   const handleNext = () => {
     if (!isLastStep) {
       setVisibleSteps((prev) => [...prev, prev.length]);
+      if (currentStep === infos.length - 2) {
+        recoverHearts();
+      }
     }
   };
 
-  // Auto-scroll to the newest card
   useEffect(() => {
     const lastCard = document.getElementById(`step-${currentStep}`);
     if (lastCard) {
       lastCard.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-  }, [visibleSteps]);
+  }, [visibleSteps, currentStep]);
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
@@ -128,7 +131,6 @@ const LessonPage: React.FC = () => {
         </AnimatePresence>
       </main>
 
-      {/* 3. FIXED ACTION FOOTER */}
       <footer className="fixed bottom-0 left-0 right-0 p-6 bg-linear-to-t from-slate-50 via-slate-50 to-transparent">
         <div className="max-w-4xl mx-auto flex justify-center md:justify-end">
           <button

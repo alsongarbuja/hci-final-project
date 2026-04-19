@@ -13,6 +13,7 @@ interface UserProgress {
   updateScore: (countryId: string, lessonId: string, score: number) => void;
   loseHeart: () => void;
   refillHearts: () => void;
+  recoverHearts: () => void;
 }
 
 export const useStore = create<UserProgress>()(
@@ -35,7 +36,7 @@ export const useStore = create<UserProgress>()(
         },
       },
       xp: 0,
-      hearts: 5,
+      hearts: 10,
       streak: 0,
 
       completeLesson: (countryId, lessonId) =>
@@ -68,7 +69,12 @@ export const useStore = create<UserProgress>()(
           hearts: Math.max(0, state.hearts - 1),
         })),
 
-      refillHearts: () => set({ hearts: 5 }),
+      refillHearts: () => set({ hearts: 10 }),
+
+      recoverHearts: () =>
+        set((state) => ({
+          hearts: Math.min(10, state.hearts + 1),
+        })),
     }),
     {
       name: "geoquest-storage",
