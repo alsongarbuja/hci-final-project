@@ -11,7 +11,7 @@ const CourseMap: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 pb-24">
-      <header className="sticky top-0 z-50 bg-white border-b-2 border-slate-200">
+      <header className="sticky top-0 z-50 bg-white border-b-2 border-slate-200 px-6">
         <nav className="max-w-300 mx-auto py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-[0_4px_0_0_rgba(16,185,129,1)] group-active:shadow-none group-active:translate-y-1 transition-all">

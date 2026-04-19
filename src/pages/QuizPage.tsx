@@ -113,7 +113,7 @@ const QuizPage: React.FC = () => {
       const nextLesson = lessonsArray[currentIndex + 1];
       const idToUnlock = nextLesson ? nextLesson.id : lessonId;
 
-      completeLesson(countryId!, idToUnlock!);
+      completeLesson(countryId!, lessonId!, idToUnlock!);
       updateScore(countryId!, lessonId!, currentScore);
       navigate(`/lessons/${countryId}`);
     }

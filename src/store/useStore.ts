@@ -6,10 +6,15 @@ interface UserProgress {
   streak: number;
   hearts: number;
   unlockedLessons: Record<string, string[]>;
+  completedLessons: Record<string, string[]>;
   quizScores: Record<string, Record<string, number>>;
 
   // Actions
-  completeLesson: (countryId: string, lessonId: string) => void;
+  completeLesson: (
+    countryId: string,
+    lessonId: string,
+    toUnlockLessonId: string,
+  ) => void;
   updateScore: (countryId: string, lessonId: string, score: number) => void;
   loseHeart: () => void;
   refillHearts: () => void;
@@ -23,6 +28,11 @@ export const useStore = create<UserProgress>()(
         nepal: ["geo"],
         usa: ["geo"],
         japan: ["geo"],
+      },
+      completedLessons: {
+        nepal: [],
+        usa: [],
+        japan: [],
       },
       quizScores: {
         nepal: {
@@ -39,14 +49,28 @@ export const useStore = create<UserProgress>()(
       hearts: 10,
       streak: 0,
 
-      completeLesson: (countryId, lessonId) =>
+      completeLesson: (countryId, lessonId, toUnlockLessonId) =>
         set((state) => {
-          return {
-            unlockedLessons: {
-              ...state.unlockedLessons,
-              [countryId]: [...state.unlockedLessons[countryId], lessonId],
-            },
-          };
+          if (
+            !state.completedLessons[countryId].includes(lessonId) &&
+            !state.unlockedLessons[countryId].includes(toUnlockLessonId)
+          ) {
+            return {
+              unlockedLessons: {
+                ...state.unlockedLessons,
+                [countryId]: [
+                  ...state.unlockedLessons[countryId],
+                  toUnlockLessonId,
+                ],
+              },
+              completedLessons: {
+                ...state.completedLessons,
+                [countryId]: [...state.completedLessons[countryId], lessonId],
+              },
+            };
+          }
+
+          return state;
         }),
 
       updateScore: (countryId, lessonId, score) =>

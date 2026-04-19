@@ -3,11 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { countries } from "../../utils/lesson";
+import { useStore } from "../../store/useStore";
 
 const LessonsListPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("All");
+
+  const { completedLessons } = useStore();
 
   const continents = ["All", "Asia", "Americas", "Europe", "Africa"];
 
@@ -140,7 +143,11 @@ const LessonsListPage: React.FC = () => {
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: "33%" }} // Replace with actual progress logic
+                        animate={{
+                          width:
+                            (completedLessons[country.id].length / 10) * 100 +
+                            "%",
+                        }}
                         className="h-full bg-emerald-500 rounded-full"
                       />
                     </div>
