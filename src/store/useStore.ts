@@ -9,7 +9,6 @@ interface UserProgress {
   completedLessons: Record<string, string[]>;
   quizScores: Record<string, Record<string, number>>;
 
-  // Actions
   completeLesson: (
     countryId: string,
     lessonId: string,
@@ -52,22 +51,25 @@ export const useStore = create<UserProgress>()(
       completeLesson: (countryId, lessonId, toUnlockLessonId) =>
         set((state) => {
           if (!state.completedLessons[countryId].includes(lessonId)) {
+            const unlockLessonsList = !state.unlockedLessons[
+              countryId
+            ].includes(toUnlockLessonId)
+              ? {
+                  unlockedLessons: {
+                    ...state.unlockedLessons,
+                    [countryId]: [
+                      ...state.unlockedLessons[countryId],
+                      toUnlockLessonId,
+                    ],
+                  },
+                }
+              : {};
+
             return {
+              ...unlockLessonsList,
               completedLessons: {
                 ...state.completedLessons,
                 [countryId]: [...state.completedLessons[countryId], lessonId],
-              },
-            };
-          }
-
-          if (!state.unlockedLessons[countryId].includes(toUnlockLessonId)) {
-            return {
-              unlockedLessons: {
-                ...state.unlockedLessons,
-                [countryId]: [
-                  ...state.unlockedLessons[countryId],
-                  toUnlockLessonId,
-                ],
               },
             };
           }

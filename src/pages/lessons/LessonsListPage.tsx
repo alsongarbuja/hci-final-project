@@ -4,14 +4,20 @@ import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { countries } from "../../utils/lesson";
 import { useStore } from "../../store/useStore";
+import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { Tooltip } from "react-tooltip";
+
+const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 const LessonsListPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("All");
+  const [viewMode, setViewMode] = useState<"grid" | "map text-center">("grid");
+
+  const [hoveredCountry, setHoveredCountry] = useState<any>(null);
 
   const { completedLessons } = useStore();
-
   const continents = ["All", "Asia", "Americas", "Europe", "Africa"];
 
   const filteredCountries = useMemo(() => {
@@ -19,162 +25,293 @@ const LessonsListPage: React.FC = () => {
       const matchesSearch = country.name
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-
       const matchesContinent =
-        activeTab === "All" || country.continent === activeTab; // Casting to any in case types aren't updated yet
-
+        activeTab === "All" || country.continent === activeTab;
       return matchesSearch && matchesContinent;
     });
   }, [searchQuery, activeTab]);
 
+  const getProgress = (countryId: string) => {
+    const country = countries.find((c) => c.id === countryId);
+    if (!country) return 0;
+    const completed = completedLessons[countryId]?.length || 0;
+    const total = country.lessons.length || 1;
+    return Math.round((completed / total) * 100);
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       <div className="bg-white pt-16 pb-24 px-6 relative z-10 overflow-hidden border-b border-slate-100">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-          <Icon icon="gis:world-map" className="w-full h-full text-black" />
-        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <button
+                onClick={() => navigate("/")}
+                className="flex items-center gap-2 text-slate-500 font-bold mb-4 hover:text-emerald-600 transition-colors"
+              >
+                <Icon icon="lucide:arrow-left" />
+                Back to Home
+              </button>
+              <h1 className="text-5xl font-black text-slate-800 tracking-tight mb-2">
+                EXPLORE <span className="text-emerald-500">WORLD</span>
+              </h1>
+            </div>
 
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
-          <motion.h1
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tighter"
-          >
-            WHERE TO NEXT?
-          </motion.h1>
-
-          <div className="max-w-xl mx-auto relative">
-            <Icon
-              icon="lucide:search"
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
-            />
-            <input
-              type="text"
-              placeholder="Search for a country..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-100 shadow-sm focus:border-sky-400 focus:ring-0 transition-all font-bold text-slate-600 outline-none"
-            />
+            <div className="flex bg-slate-100 p-1 rounded-2xl">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`px-6 py-3 rounded-xl font-black ${viewMode === "grid" ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500"}`}
+              >
+                GRID
+              </button>
+              <button
+                onClick={() => setViewMode("map text-center")}
+                className={`px-6 py-3 rounded-xl font-black ${viewMode.includes("map") ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500"}`}
+              >
+                MAP
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative -mt-8 z-20">
-        <div className="bg-white p-2 rounded-2xl shadow-xl flex gap-2 overflow-x-auto no-scrollbar border border-slate-100">
-          {continents.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-xl font-black transition-all whitespace-nowrap ${
-                activeTab === tab
-                  ? "bg-sky-500 text-white shadow-[0_4px_0_0_rgba(14,165,233,1)]"
-                  : "text-slate-400 hover:bg-slate-50 hover:text-slate-600"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. Country Grid */}
-      <main className="max-w-6xl mx-auto px-6 mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredCountries.map((country) => (
-              <motion.div
-                key={country.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                whileHover={{ y: -5 }}
-                onClick={() => navigate(`/lessons/${country.id}`)}
-                className="cursor-pointer group"
-              >
-                <div className="bg-white border-2 border-slate-200 rounded-4xl overflow-hidden shadow-[0_8px_0_0_rgba(226,232,240,1)] hover:border-sky-400 transition-all active:shadow-none active:translate-y-2">
-                  <div
-                    className={`h-24 relative ${
-                      country.id === "nepal"
-                        ? "bg-emerald-400"
-                        : country.id === "usa"
-                          ? "bg-blue-400"
-                          : "bg-rose-400"
+      <main className="max-w-6xl mx-auto px-6 -mt-12 relative z-20">
+        {viewMode === "grid" ? (
+          <>
+            <div className="flex flex-col md:flex-row gap-4 mb-12">
+              <div className="flex-1 relative group">
+                <Icon
+                  icon="lucide:search"
+                  className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl group-focus-within:text-emerald-500 transition-colors"
+                />
+                <input
+                  type="text"
+                  placeholder="Search countries..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white border-2 border-slate-100 rounded-2xl py-5 pl-14 pr-6 font-bold text-slate-600 focus:outline-none focus:border-emerald-500 shadow-xl shadow-slate-200/50 transition-all"
+                />
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+                {continents.map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-6 py-2 rounded-xl font-black whitespace-nowrap transition-all ${
+                      activeTab === tab
+                        ? "bg-slate-800 text-white shadow-lg shadow-slate-200"
+                        : "bg-white text-slate-400 hover:bg-slate-50"
                     }`}
                   >
-                    <div className="absolute -bottom-10 left-6">
-                      <div className="w-20 h-20 bg-white rounded-2xl border-4 border-white shadow-lg flex items-center justify-center">
-                        <Icon
-                          icon={`emojione:flag-for-${
-                            country.id === "nepal"
-                              ? "nepal"
-                              : country.id === "usa"
-                                ? "united-states"
-                                : "japan"
-                          }`}
-                          className="text-5xl"
-                        />
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <AnimatePresence mode="popLayout">
+                {filteredCountries.map((country) => {
+                  const progress = getProgress(country.id);
+                  const isCompleted = progress === 100;
+
+                  return (
+                    <motion.div
+                      layout
+                      key={country.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      whileHover={{ y: -8 }}
+                      onClick={() => navigate(`/lessons/${country.id}`)}
+                      className="group cursor-pointer"
+                    >
+                      <div className="bg-white rounded-4xl p-2 shadow-xl shadow-slate-200/60 border-2 border-transparent group-hover:border-emerald-500 transition-all relative overflow-hidden">
+                        {isCompleted && (
+                          <motion.div
+                            initial={{ rotate: -20, scale: 0 }}
+                            animate={{ rotate: -15, scale: 1 }}
+                            className="absolute top-4 right-4 z-30 bg-emerald-100 border-4 border-double border-emerald-600 rounded-full w-20 h-20 flex items-center justify-center opacity-80 pointer-events-none"
+                          >
+                            <div className="text-center">
+                              <p className="text-[10px] font-black text-emerald-700 leading-none">
+                                PASSED
+                              </p>
+                              <Icon
+                                icon="lucide:check-circle"
+                                className="text-emerald-600 text-xl mx-auto"
+                              />
+                              <p className="text-[8px] font-black text-emerald-700 leading-none">
+                                100%
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+
+                        <div className="bg-slate-50 rounded-[1.7rem] p-6">
+                          <div className="flex items-start justify-between mb-8">
+                            <div className="p-4 bg-white rounded-2xl shadow-sm group-hover:scale-110 transition-transform duration-500">
+                              <Icon
+                                icon={country.stampIcon}
+                                className="text-5xl"
+                              />
+                            </div>
+                            <div className="text-right">
+                              <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                                {country.continent}
+                              </span>
+                              <h3 className="text-2xl font-black text-slate-800 leading-tight">
+                                {country.name}
+                              </h3>
+                            </div>
+                          </div>
+
+                          <div className="space-y-4">
+                            <div className="flex justify-between items-end">
+                              <div className="text-slate-400 font-bold text-sm">
+                                Progress
+                              </div>
+                              <div className="text-2xl font-black text-slate-800">
+                                {progress}%
+                              </div>
+                            </div>
+                            <div className="h-3 bg-slate-200 rounded-full overflow-hidden p-1">
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: `${progress}%` }}
+                                className="h-full bg-emerald-500 rounded-full"
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-12 pb-6 px-6">
-                    <h3 className="text-2xl font-black text-slate-700 uppercase tracking-tighter">
-                      {country.name}
-                    </h3>
-                    <p className="text-slate-500 font-bold text-sm mb-4">
-                      {country.tagline}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-black text-slate-400 uppercase tracking-wider">
-                          {country.continent || "Globe"}
-                        </span>
-                      </div>
-
-                      <div className="bg-slate-100 px-3 py-1 rounded-lg flex items-center gap-1 text-slate-500 font-black text-xs uppercase">
-                        <Icon icon="lucide:book-open" />
-                        {country.lessons.length} Units
-                      </div>
-                    </div>
-
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{
-                          width:
-                            (completedLessons[country.id].length / 10) * 100 +
-                            "%",
-                        }}
-                        className="h-full bg-emerald-500 rounded-full"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {/* Empty State */}
-        {filteredCountries.length === 0 && (
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+          </>
+        ) : (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20"
+            className="bg-white rounded-[3rem] p-2 shadow-2xl border-2 border-slate-100 relative overflow-hidden"
           >
-            <Icon
-              icon="twemoji:magnifying-glass-tilted-right"
-              className="text-8xl mx-auto mb-4"
+            <ComposableMap projectionConfig={{ scale: 170 }}>
+              <Geographies geography={geoUrl}>
+                {({ geographies }) =>
+                  geographies.map((geo) => {
+                    const countryData = countries.find(
+                      (c) =>
+                        c.name.toLowerCase() ===
+                        geo.properties.name.toLowerCase(),
+                    );
+
+                    const progress = countryData
+                      ? getProgress(countryData.id)
+                      : 0;
+                    const isSupported = !!countryData;
+                    const isCompleted = isSupported && progress === 100;
+
+                    // Determine Fill Color
+                    let fillColor = "#f1f5f9"; // Default (not in list)
+                    if (isSupported) {
+                      fillColor = isCompleted ? "#10b981" : "#3b82f6"; // Green if 100%, Blue if in list
+                    }
+
+                    return (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        data-tooltip-id="map-tooltip"
+                        onMouseEnter={() => {
+                          if (isSupported)
+                            setHoveredCountry({ ...countryData, progress });
+                        }}
+                        onMouseLeave={() => setHoveredCountry(null)}
+                        onClick={() => {
+                          if (isSupported)
+                            navigate(`/lessons/${countryData.id}`);
+                        }}
+                        style={{
+                          default: {
+                            fill: fillColor,
+                            outline: "none",
+                            stroke: "#fff",
+                            strokeWidth: 0.5,
+                          },
+                          hover: {
+                            fill: isSupported
+                              ? isCompleted
+                                ? "#059669"
+                                : "#2563eb"
+                              : "#e2e8f0",
+                            cursor: isSupported ? "pointer" : "default",
+                            outline: "none",
+                          },
+                          pressed: { fill: "#1e40af", outline: "none" },
+                        }}
+                      />
+                    );
+                  })
+                }
+              </Geographies>
+            </ComposableMap>
+
+            {/* 2. localized Popup using React Tooltip */}
+            <Tooltip
+              id="map-tooltip"
+              place="top"
+              style={{
+                backgroundColor: "transparent",
+                boxShadow: "none",
+                padding: 0,
+              }}
+              render={() =>
+                hoveredCountry && (
+                  <div className="bg-slate-900 text-white p-4 rounded-2xl shadow-2xl border border-slate-700 min-w-50 animate-in fade-in zoom-in duration-200">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon
+                        icon={hoveredCountry.stampIcon}
+                        className="text-3xl"
+                      />
+                      <div>
+                        <h4 className="font-black text-lg leading-none">
+                          {hoveredCountry.name}
+                        </h4>
+                        <p className="text-[10px] text-slate-400 uppercase font-bold tracking-widest">
+                          {hoveredCountry.continent}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs font-bold">
+                        <span>Progress</span>
+                        <span
+                          className={
+                            hoveredCountry.progress === 100
+                              ? "text-emerald-400"
+                              : "text-blue-400"
+                          }
+                        >
+                          {hoveredCountry.progress}%
+                        </span>
+                      </div>
+                      <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full transition-all duration-500 ${hoveredCountry.progress === 100 ? "bg-emerald-500" : "bg-blue-500"}`}
+                          style={{ width: `${hoveredCountry.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                    <p className="text-[9px] text-slate-500 mt-3 font-bold italic">
+                      Click to open Roadmap
+                    </p>
+                  </div>
+                )
+              }
             />
-            <h2 className="text-2xl font-black text-slate-400 uppercase">
-              No results found
-            </h2>
-            <p className="font-bold text-slate-300">
-              Try adjusting your filters or search query!
-            </p>
           </motion.div>
         )}
       </main>
@@ -183,3 +320,306 @@ const LessonsListPage: React.FC = () => {
 };
 
 export default LessonsListPage;
+// import React, { useState, useMemo } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { Icon } from "@iconify/react";
+// import { useNavigate } from "react-router-dom";
+// import { countries } from "../../utils/lesson";
+// import { useStore } from "../../store/useStore";
+// import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+
+// const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+// const LessonsListPage: React.FC = () => {
+//   const navigate = useNavigate();
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [activeTab, setActiveTab] = useState("All");
+//   const [viewMode, setViewMode] = useState<"grid" | "map">("grid");
+//   const [tooltipContent, setTooltipContent] = useState<string | null>(null);
+
+//   const { completedLessons } = useStore();
+
+//   const continents = ["All", "Asia", "Americas", "Europe", "Africa"];
+
+//   const filteredCountries = useMemo(() => {
+//     return countries.filter((country) => {
+//       const matchesSearch = country.name
+//         .toLowerCase()
+//         .includes(searchQuery.toLowerCase());
+//       const matchesContinent =
+//         activeTab === "All" || country.continent === activeTab;
+//       return matchesSearch && matchesContinent;
+//     });
+//   }, [searchQuery, activeTab]);
+
+//   const getProgress = (countryId: string) => {
+//     const completed = completedLessons[countryId]?.length || 0;
+//     const total =
+//       countries.find((c) => c.id === countryId)?.lessons.length || 1;
+//     return Math.round((completed / total) * 100);
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-slate-50 pb-20">
+//       <div className="bg-white pt-16 pb-24 px-6 relative z-10 overflow-hidden border-b border-slate-100">
+//         <div className="max-w-6xl mx-auto relative z-10">
+//           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+//             <div>
+//               <button
+//                 onClick={() => navigate("/")}
+//                 className="flex items-center gap-2 text-slate-500 font-bold mb-4 hover:text-emerald-600 transition-colors"
+//               >
+//                 <Icon icon="lucide:arrow-left" />
+//                 Back to Home
+//               </button>
+//               <h1 className="text-5xl font-black text-slate-800 tracking-tight mb-2">
+//                 EXPLORE <span className="text-emerald-500">WORLD</span>
+//               </h1>
+//               <p className="text-slate-400 font-bold text-lg">
+//                 Select a destination to start your learning journey.
+//               </p>
+//             </div>
+
+//             <div className="flex bg-slate-100 p-1 rounded-2xl">
+//               <button
+//                 onClick={() => setViewMode("grid")}
+//                 className={`flex items-center gap-2 px-6 py-3 rounded-xl font-black transition-all ${
+//                   viewMode === "grid"
+//                     ? "bg-white shadow-sm text-emerald-600"
+//                     : "text-slate-500"
+//                 }`}
+//               >
+//                 <Icon icon="lucide:layout-grid" />
+//                 GRID
+//               </button>
+//               <button
+//                 onClick={() => setViewMode("map")}
+//                 className={`flex items-center gap-2 px-6 py-3 rounded-xl font-black transition-all ${
+//                   viewMode === "map"
+//                     ? "bg-white shadow-sm text-emerald-600"
+//                     : "text-slate-500"
+//                 }`}
+//               >
+//                 <Icon icon="lucide:map" />
+//                 MAP
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       <main className="max-w-6xl mx-auto px-6 -mt-12 relative z-20">
+//         {viewMode === "grid" ? (
+//           <>
+//             <div className="flex flex-col md:flex-row gap-4 mb-12">
+//               <div className="flex-1 relative group">
+//                 <Icon
+//                   icon="lucide:search"
+//                   className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl group-focus-within:text-emerald-500 transition-colors"
+//                 />
+//                 <input
+//                   type="text"
+//                   placeholder="Search countries..."
+//                   value={searchQuery}
+//                   onChange={(e) => setSearchQuery(e.target.value)}
+//                   className="w-full bg-white border-2 border-slate-100 rounded-2xl py-5 pl-14 pr-6 font-bold text-slate-600 focus:outline-none focus:border-emerald-500 shadow-xl shadow-slate-200/50 transition-all"
+//                 />
+//               </div>
+//               <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+//                 {continents.map((tab) => (
+//                   <button
+//                     key={tab}
+//                     onClick={() => setActiveTab(tab)}
+//                     className={`px-6 py-2 rounded-xl font-black whitespace-nowrap transition-all ${
+//                       activeTab === tab
+//                         ? "bg-slate-800 text-white shadow-lg shadow-slate-200"
+//                         : "bg-white text-slate-400 hover:bg-slate-50"
+//                     }`}
+//                   >
+//                     {tab}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//               <AnimatePresence mode="popLayout">
+//                 {filteredCountries.map((country) => {
+//                   const progress = getProgress(country.id);
+//                   const isCompleted = progress === 100;
+
+//                   return (
+//                     <motion.div
+//                       layout
+//                       key={country.id}
+//                       initial={{ opacity: 0, scale: 0.9 }}
+//                       animate={{ opacity: 1, scale: 1 }}
+//                       exit={{ opacity: 0, scale: 0.9 }}
+//                       whileHover={{ y: -8 }}
+//                       onClick={() => navigate(`/lessons/${country.id}`)}
+//                       className="group cursor-pointer"
+//                     >
+//                       <div className="bg-white rounded-4xl p-2 shadow-xl shadow-slate-200/60 border-2 border-transparent group-hover:border-emerald-500 transition-all relative overflow-hidden">
+//                         {isCompleted && (
+//                           <motion.div
+//                             initial={{ rotate: -20, scale: 0 }}
+//                             animate={{ rotate: -15, scale: 1 }}
+//                             className="absolute top-4 right-4 z-30 bg-emerald-100 border-4 border-double border-emerald-600 rounded-full w-20 h-20 flex items-center justify-center opacity-80 pointer-events-none"
+//                           >
+//                             <div className="text-center">
+//                               <p className="text-[10px] font-black text-emerald-700 leading-none">
+//                                 PASSED
+//                               </p>
+//                               <Icon
+//                                 icon="lucide:check-circle"
+//                                 className="text-emerald-600 text-xl mx-auto"
+//                               />
+//                               <p className="text-[8px] font-black text-emerald-700 leading-none">
+//                                 100%
+//                               </p>
+//                             </div>
+//                           </motion.div>
+//                         )}
+
+//                         <div className="bg-slate-50 rounded-[1.7rem] p-6">
+//                           <div className="flex items-start justify-between mb-8">
+//                             <div className="p-4 bg-white rounded-2xl shadow-sm group-hover:scale-110 transition-transform duration-500">
+//                               <Icon
+//                                 icon={country.stampIcon}
+//                                 className="text-5xl"
+//                               />
+//                             </div>
+//                             <div className="text-right">
+//                               <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
+//                                 {country.continent}
+//                               </span>
+//                               <h3 className="text-2xl font-black text-slate-800 leading-tight">
+//                                 {country.name}
+//                               </h3>
+//                             </div>
+//                           </div>
+
+//                           <div className="space-y-4">
+//                             <div className="flex justify-between items-end">
+//                               <div className="text-slate-400 font-bold text-sm">
+//                                 Progress
+//                               </div>
+//                               <div className="text-2xl font-black text-slate-800">
+//                                 {progress}%
+//                               </div>
+//                             </div>
+//                             <div className="h-3 bg-slate-200 rounded-full overflow-hidden p-1">
+//                               <motion.div
+//                                 initial={{ width: 0 }}
+//                                 animate={{ width: `${progress}%` }}
+//                                 className="h-full bg-emerald-500 rounded-full"
+//                               />
+//                             </div>
+//                           </div>
+//                         </div>
+//                       </div>
+//                     </motion.div>
+//                   );
+//                 })}
+//               </AnimatePresence>
+//             </div>
+//           </>
+//         ) : (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             className="bg-white rounded-[3rem] p-8 shadow-2xl border-2 border-slate-100 min-h-150 flex items-center justify-center relative overflow-hidden"
+//           >
+//             <ComposableMap projectionConfig={{ scale: 200 }}>
+//               <Geographies geography={geoUrl}>
+//                 {({ geographies }) =>
+//                   geographies.map((geo) => {
+//                     console.log(geo.properties.name);
+
+//                     const countryData = countries.find(
+//                       (c) =>
+//                         c.name.toLowerCase() ===
+//                         geo.properties.name.toLowerCase(),
+//                     );
+//                     const progress = countryData
+//                       ? getProgress(countryData.id)
+//                       : 0;
+//                     const isUnlocked = !!countryData;
+
+//                     return (
+//                       <Geography
+//                         key={geo.rsmKey}
+//                         geography={geo}
+//                         onMouseEnter={() => {
+//                           if (isUnlocked)
+//                             setTooltipContent(
+//                               `${countryData.name}: ${progress}% Complete`,
+//                             );
+//                         }}
+//                         onMouseLeave={() => setTooltipContent(null)}
+//                         onClick={() => {
+//                           if (isUnlocked)
+//                             navigate(`/lessons/${countryData.id}`);
+//                         }}
+//                         style={{
+//                           default: {
+//                             fill: isUnlocked
+//                               ? progress === 100
+//                                 ? "#10b981"
+//                                 : "#34d399"
+//                               : "#f1f5f9",
+//                             outline: "none",
+//                             stroke: "#fff",
+//                             strokeWidth: 0.5,
+//                           },
+//                           hover: {
+//                             fill: isUnlocked ? "#059669" : "#e2e8f0",
+//                             outline: "none",
+//                             cursor: isUnlocked ? "pointer" : "default",
+//                           },
+//                           pressed: {
+//                             fill: "#047857",
+//                             outline: "none",
+//                           },
+//                         }}
+//                       />
+//                     );
+//                   })
+//                 }
+//               </Geographies>
+//             </ComposableMap>
+
+//             {/* Tooltip Popup */}
+//             {tooltipContent && (
+//               <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-2xl font-black shadow-2xl pointer-events-none animate-bounce">
+//                 {tooltipContent}
+//               </div>
+//             )}
+//           </motion.div>
+//         )}
+
+//         {/* Empty State */}
+//         {filteredCountries.length === 0 && viewMode === "grid" && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             className="text-center py-20"
+//           >
+//             <Icon
+//               icon="twemoji:magnifying-glass-tilted-right"
+//               className="text-8xl mx-auto mb-4"
+//             />
+//             <h2 className="text-2xl font-black text-slate-400 uppercase">
+//               No results found
+//             </h2>
+//             <p className="font-bold text-slate-300">
+//               Try adjusting your filters or search query!
+//             </p>
+//           </motion.div>
+//         )}
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default LessonsListPage;

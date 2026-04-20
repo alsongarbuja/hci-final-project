@@ -2611,7 +2611,7 @@ export const countries = [
   },
   {
     id: "usa",
-    name: "USA",
+    name: "United States of America",
     continent: "Americas",
     tagline: "The largest country",
     stampIcon: "emojione:flag-for-united-states",
