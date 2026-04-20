@@ -24,10 +24,8 @@ const Header: React.FC = () => {
           </span>
         </Link>
 
-        {/* Navigation Items */}
         <div className="flex items-center gap-8">
           <div className="relative">
-            {/* Lessons Dropdown Trigger */}
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl font-black uppercase text-sm tracking-wider transition-colors ${
@@ -45,11 +43,9 @@ const Header: React.FC = () => {
               </motion.span>
             </button>
 
-            {/* Dropdown Menu */}
             <AnimatePresence>
               {isDropdownOpen && (
                 <>
-                  {/* Invisible backdrop to close dropdown when clicking outside */}
                   <div
                     className="fixed inset-0 z-[-1]"
                     onClick={() => setIsDropdownOpen(false)}
@@ -59,7 +55,7 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute top-full left-0 mt-2 w-64 bg-white border-2 border-slate-200 rounded-2xl shadow-xl overflow-hidden"
+                    className="absolute top-full -left-30 mt-2 w-64 bg-white border-2 border-slate-200 rounded-2xl shadow-xl overflow-hidden"
                   >
                     <div className="p-2">
                       {lessons.map((lesson) => (

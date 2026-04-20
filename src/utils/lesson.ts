@@ -2613,17 +2613,1561 @@ export const countries = [
     id: "usa",
     name: "United States of America",
     continent: "Americas",
-    tagline: "The largest country",
+    tagline: "The Land of Opportunity",
     stampIcon: "emojione:flag-for-united-states",
-    lessons: [],
+    lessons: [
+      {
+        id: "geo",
+        name: "Geography",
+        icon: "lucide:map",
+        color: "bg-blue-500",
+        shadow: "shadow-[0_6px_0_0_rgba(59,130,246,1)]",
+        quiz: [
+          {
+            id: "q1",
+            type: "multiple-choice",
+            question: "How many states make up the United States of America?",
+            mascotComment: "Think about the stars on the flag!",
+            icon: "lucide:star",
+            options: [
+              {
+                id: "a",
+                text: "48 States",
+                icon: "lucide:layers",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "50 States",
+                icon: "lucide:layout-grid",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "52 States",
+                icon: "lucide:list-plus",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "There are 50 states in total. The last two states to join were Alaska and Hawaii in 1959.",
+          },
+          {
+            id: "q2",
+            type: "order",
+            question: "Order these U.S. cities from East to West Coast",
+            mascotComment: "Follow the sun across the country!",
+            icon: "lucide:move-right",
+            options: [
+              { id: "c1", text: "New York City", icon: "lucide:building-2" },
+              { id: "c2", text: "Chicago", icon: "lucide:wind" },
+              { id: "c3", text: "Los Angeles", icon: "lucide:palm-tree" },
+            ],
+            correctOrder: ["c1", "c2", "c3"],
+            explanation:
+              "New York is on the Atlantic (East), Chicago is in the Midwest, and Los Angeles is on the Pacific (West).",
+          },
+
+          {
+            id: "q3",
+            type: "multiple-choice",
+            question: "What is the tallest mountain in the United States?",
+            mascotComment:
+              "It's located in the 'Last Frontier' state of Alaska!",
+            icon: "lucide:mountain-snow",
+            options: [
+              {
+                id: "a",
+                text: "Mount Whitney",
+                icon: "lucide:mountain",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Mount Everest",
+                icon: "lucide:trending-up",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "Denali",
+                icon: "lucide:cloud-snow",
+                isCorrect: true,
+              },
+            ],
+            explanation:
+              "Denali (formerly known as Mount McKinley) in Alaska stands at 20,310 feet above sea level, making it the highest peak in North America.",
+          },
+          {
+            id: "q4",
+            type: "true-false",
+            question:
+              "The Mississippi River is the longest river system in the United States.",
+            mascotComment: "It flows all the way down to the Gulf of Mexico!",
+            icon: "lucide:waves",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "When combined with the Missouri River, the Mississippi-Missouri system is the longest in the US, acting as a major highway for commerce.",
+          },
+          {
+            id: "q5",
+            type: "order",
+            question:
+              "Order these states from North to South based on their location.",
+            mascotComment: "Start near Canada and head toward the tropics!",
+            icon: "lucide:map-pin",
+            options: [
+              { id: "s1", text: "Washington", icon: "lucide:trees" },
+              { id: "s2", text: "Oregon", icon: "lucide:mountain" },
+              { id: "s3", text: "California", icon: "lucide:sun" },
+            ],
+            correctOrder: ["s1", "s2", "s3"],
+            explanation:
+              "Washington is the northernmost state on the West Coast, followed by Oregon, with California stretching all the way to the southern border.",
+          },
+          {
+            id: "q6",
+            type: "multiple-choice",
+            question:
+              "Which of these is the largest state in the USA by land area?",
+            mascotComment: "It's more than twice the size of Texas!",
+            icon: "lucide:maximize",
+            options: [
+              {
+                id: "a",
+                text: "Texas",
+                icon: "lucide:shrub",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Alaska",
+                icon: "lucide:snowflake",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Montana",
+                icon: "lucide:mountain",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Alaska is by far the largest state. In fact, you could fit Texas inside Alaska twice and still have room for several smaller states!",
+          },
+          {
+            id: "q7",
+            type: "multiple-choice",
+            question: "The Grand Canyon is located in which U.S. state?",
+            mascotComment: "Look for the 'Grand Canyon State' on a map!",
+            icon: "lucide:aperture",
+            options: [
+              {
+                id: "a",
+                text: "Nevada",
+                icon: "lucide:dice-5",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Utah",
+                icon: "lucide:rocking-chair",
+                isCorrect: false,
+              },
+              { id: "c", text: "Arizona", icon: "lucide:sun", isCorrect: true },
+            ],
+            explanation:
+              "The Grand Canyon was carved by the Colorado River over millions of years and is the most famous landmark in Arizona.",
+          },
+          {
+            id: "q8",
+            type: "order",
+            question: "Rank these Great Lakes from West to East.",
+            mascotComment:
+              "These hold about 20% of the world's fresh surface water!",
+            icon: "lucide:droplets",
+            options: [
+              { id: "l1", text: "Lake Superior", icon: "lucide:waves" },
+              { id: "l2", text: "Lake Michigan", icon: "lucide:anchor" },
+              { id: "l3", text: "Lake Erie", icon: "lucide:ship" },
+            ],
+            correctOrder: ["l1", "l2", "l3"],
+            explanation:
+              "Lake Superior is the westernmost, followed by Michigan/Huron, and Erie is further east toward the Atlantic.",
+          },
+          {
+            id: "q9",
+            type: "true-false",
+            question:
+              "Death Valley is the lowest and hottest point in North America.",
+            mascotComment: "It's located in the Mojave Desert!",
+            icon: "lucide:thermometer-sun",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "Badwater Basin in Death Valley sits at 282 feet below sea level and has recorded some of the highest temperatures on Earth.",
+          },
+          {
+            id: "q10",
+            type: "multiple-choice",
+            question: "Which ocean borders the United States to the East?",
+            mascotComment: "This is the ocean you cross to get to Europe!",
+            icon: "lucide:ship",
+            options: [
+              {
+                id: "a",
+                text: "Pacific Ocean",
+                icon: "lucide:sunset",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Indian Ocean",
+                icon: "lucide:palmtree",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "Atlantic Ocean",
+                icon: "lucide:waves",
+                isCorrect: true,
+              },
+            ],
+            explanation:
+              "The Atlantic Ocean borders the East Coast (New York, Florida, etc.), while the Pacific Ocean borders the West Coast (California, Oregon, Washington).",
+          },
+        ],
+      },
+      {
+        id: "modern",
+        name: "Modern USA",
+        icon: "lucide:cpu",
+        color: "bg-cyan-500",
+        shadow: "shadow-[0_6px_0_0_rgba(6,182,212,1)]",
+        quiz: [
+          {
+            id: "m1",
+            type: "multiple-choice",
+            question:
+              "Which California region is known as the global center for high technology and innovation?",
+            mascotComment:
+              "It's named after a chemical element used in computer chips!",
+            icon: "lucide:microchip",
+            options: [
+              {
+                id: "a",
+                text: "Silicon Valley",
+                icon: "lucide:circuit-board",
+                isCorrect: true,
+              },
+              {
+                id: "b",
+                text: "Death Valley",
+                icon: "lucide:skull",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "Napa Valley",
+                icon: "lucide:grape",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Silicon Valley is home to many of the world's largest tech corporations, including Apple and Google.",
+          },
+          {
+            id: "m2",
+            type: "true-false",
+            question:
+              "The first successful airplane flight took place in North Carolina.",
+            mascotComment: "The Wright Brothers made history here!",
+            icon: "lucide:plane",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "Orville and Wilbur Wright achieved the first powered flight at Kitty Hawk, North Carolina, in 1903.",
+          },
+          {
+            id: "m3",
+            type: "multiple-choice",
+            question:
+              "Which American city is known as the 'Space City' and is home to NASA's Mission Control?",
+            mascotComment: "Houston, we have a question!",
+            icon: "lucide:rocket",
+            options: [
+              {
+                id: "a",
+                text: "Orlando",
+                icon: "lucide:palmtree",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Houston",
+                icon: "lucide:radio",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Seattle",
+                icon: "lucide:cloud-rain",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Houston, Texas, is home to the Lyndon B. Johnson Space Center, where NASA's flight control has managed every human space mission since 1965.",
+          },
+          {
+            id: "m4",
+            type: "true-false",
+            question:
+              "The Internet was originally a project developed by the U.S. Department of Defense.",
+            mascotComment: "It started as a way to link computers together!",
+            icon: "lucide:network",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "The Internet began as ARPANET, a project by the U.S. Department of Defense in the 1960s to allow researchers to share information across different locations.",
+          },
+          {
+            id: "m5",
+            type: "order",
+            question:
+              "Order these tech giants by the year they were founded (Earliest to Latest)",
+            mascotComment: "From the garage to the world!",
+            icon: "lucide:history",
+            options: [
+              { id: "t1", text: "Microsoft", icon: "lucide:window" },
+              { id: "t2", text: "Google", icon: "lucide:search" },
+              { id: "t3", text: "Facebook (Meta)", icon: "lucide:thumbs-up" },
+            ],
+            correctOrder: ["t1", "t2", "t3"],
+            explanation:
+              "Microsoft was founded in 1975, Google in 1998, and Facebook followed in 2004.",
+          },
+          {
+            id: "m6",
+            type: "multiple-choice",
+            question:
+              "Which entertainment company opened its first theme park in California in 1955?",
+            mascotComment: "It all started with a mouse!",
+            icon: "lucide:ticket",
+            options: [
+              {
+                id: "a",
+                text: "Universal Studios",
+                icon: "lucide:film",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Disney",
+                icon: "lucide:sparkles",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Warner Bros",
+                icon: "lucide:shield",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Walt Disney opened Disneyland in Anaheim, California, on July 17, 1955. It remains a global icon of American pop culture.",
+          },
+          {
+            id: "m7",
+            type: "multiple-choice",
+            question:
+              "What is the name of the private U.S. company that became the first to send humans to the International Space Station?",
+            mascotComment: "They make reusable rockets too!",
+            icon: "lucide:satellite",
+            options: [
+              { id: "a", text: "SpaceX", icon: "lucide:zap", isCorrect: true },
+              {
+                id: "b",
+                text: "Blue Origin",
+                icon: "lucide:feather",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "Boeing",
+                icon: "lucide:plane",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Founded by Elon Musk, SpaceX became the first private company to launch, orbit, and recover a spacecraft and send astronauts to the ISS.",
+          },
+          {
+            id: "m8",
+            type: "true-false",
+            question:
+              "The United States is the world's largest producer of corn.",
+            mascotComment: "Modern farming uses a lot of high-tech gear!",
+            icon: "lucide:wheat",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "Thanks to high-tech industrial agriculture, the U.S. is the global leader in corn production, mostly grown in the 'Corn Belt' of the Midwest.",
+          },
+          {
+            id: "m9",
+            type: "order",
+            question:
+              "Order these communication milestones in the USA by when they occurred.",
+            mascotComment: "How we send messages has changed a lot!",
+            icon: "lucide:message-square",
+            options: [
+              {
+                id: "c1",
+                text: "The first Telegraph",
+                icon: "lucide:fast-forward",
+              },
+              {
+                id: "c2",
+                text: "The first Telephone call",
+                icon: "lucide:phone",
+              },
+              {
+                id: "c3",
+                text: "The first iPhone launch",
+                icon: "lucide:smartphone",
+              },
+            ],
+            correctOrder: ["c1", "c2", "c3"],
+            explanation:
+              "Samuel Morse sent the first telegraph in 1844, Alexander Graham Bell made the first phone call in 1876, and the iPhone was released in 2007.",
+          },
+          {
+            id: "m10",
+            type: "multiple-choice",
+            question:
+              "Which city is considered the 'Live Music Capital of the World' and a major hub for modern tech festivals like SXSW?",
+            mascotComment: "Keep this city weird!",
+            icon: "lucide:music",
+            options: [
+              {
+                id: "a",
+                text: "Nashville",
+                icon: "lucide:guitar",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Austin",
+                icon: "lucide:monitor",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Las Vegas",
+                icon: "lucide:clover",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Austin, Texas, is famous for its music scene and is a growing tech hub, hosting the massive South by Southwest (SXSW) festival every year.",
+          },
+        ],
+      },
+      {
+        id: "nature",
+        name: "Nature",
+        icon: "lucide:leaf",
+        color: "bg-green-500",
+        shadow: "shadow-[0_6px_0_0_rgba(34,197,94,1)]",
+        quiz: [
+          {
+            id: "n1",
+            type: "multiple-choice",
+            question:
+              "What was the first National Park established in the USA (and the world)?",
+            mascotComment: "It is famous for its geysers like 'Old Faithful'.",
+            icon: "lucide:mountain",
+            options: [
+              {
+                id: "a",
+                text: "Yosemite",
+                icon: "lucide:trees",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Yellowstone",
+                icon: "lucide:flame",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Grand Canyon",
+                icon: "lucide:map",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Yellowstone was signed into law as a National Park in 1872 by President Ulysses S. Grant.",
+          },
+          {
+            id: "n2",
+            type: "multiple-choice",
+            question: "What is the national bird of the United States?",
+            mascotComment: "It represents strength and freedom!",
+            icon: "lucide:bird",
+            options: [
+              {
+                id: "a",
+                text: "Golden Eagle",
+                icon: "lucide:crown",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Bald Eagle",
+                icon: "lucide:shield",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Wild Turkey",
+                icon: "lucide:utensils",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "The Bald Eagle has been the national symbol of the USA since 1782.",
+          },
+          {
+            id: "n3",
+            type: "multiple-choice",
+            question:
+              "Which of these is the largest land mammal in North America?",
+            mascotComment: "It’s a massive, furry icon of the Great Plains!",
+            icon: "lucide:shrub",
+            options: [
+              {
+                id: "a",
+                text: "Grizzly Bear",
+                icon: "lucide:paw-print",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "American Bison",
+                icon: "lucide:beef",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Moose",
+                icon: "lucide:trees",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "The American Bison is the national mammal of the U.S. and can weigh up to 2,000 pounds!",
+          },
+          {
+            id: "n4",
+            type: "true-false",
+            question:
+              "General Sherman, located in Sequoia National Park, is the world's largest known living single-stem tree.",
+            mascotComment:
+              "It's so tall and wide, it feels like a skyscraper made of wood!",
+            icon: "lucide:trees",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "By volume, the General Sherman giant sequoia is the largest known living tree on Earth.",
+          },
+          {
+            id: "n5",
+            type: "multiple-choice",
+            question:
+              "Which U.S. state is the only place in the world where both alligators and crocodiles live together in the wild?",
+            mascotComment: "Watch your step in the swamps of the Everglades!",
+            icon: "lucide:waves",
+            options: [
+              {
+                id: "a",
+                text: "Louisiana",
+                icon: "lucide:droplets",
+                isCorrect: false,
+              },
+              { id: "b", text: "Florida", icon: "lucide:sun", isCorrect: true },
+              {
+                id: "c",
+                text: "Texas",
+                icon: "lucide:cactus",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Southern Florida is the only ecosystem on Earth where American Alligators and American Crocodiles coexist.",
+          },
+          {
+            id: "n6",
+            type: "order",
+            question:
+              "Order these animals by their typical top speed (Slowest to Fastest)",
+            mascotComment: "Nature's very own racing competition!",
+            icon: "lucide:gauge",
+            options: [
+              { id: "v1", text: "Desert Tortoise", icon: "lucide:shell" },
+              { id: "v2", text: "Gray Wolf", icon: "lucide:dog" },
+              { id: "v3", text: "Pronghorn Antelope", icon: "lucide:zap" },
+            ],
+            correctOrder: ["v1", "v2", "v3"],
+            explanation:
+              "The Pronghorn is the fastest land animal in North America, capable of reaching speeds of 55 mph!",
+          },
+          {
+            id: "n7",
+            type: "multiple-choice",
+            question:
+              "Which National Park is famous for its unique 'Hoodoos' (tall, thin spires of rock)?",
+            mascotComment: "They look like a forest made of orange stone!",
+            icon: "lucide:rocking-chair",
+            options: [
+              {
+                id: "a",
+                text: "Bryce Canyon",
+                icon: "lucide:mountain",
+                isCorrect: true,
+              },
+              {
+                id: "b",
+                text: "Zion",
+                icon: "lucide:clover",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "Arches",
+                icon: "lucide:aperture",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Bryce Canyon in Utah has the largest concentration of hoodoos found anywhere on Earth.",
+          },
+          {
+            id: "n8",
+            type: "true-false",
+            question:
+              "The Venus Flytrap is native to the wetlands of North and South Carolina.",
+            mascotComment: "This plant actually eats bugs!",
+            icon: "lucide:flower",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "Despite being world-famous, the Venus Flytrap only grows naturally in a small 75-mile radius around Wilmington, North Carolina.",
+          },
+          {
+            id: "n9",
+            type: "multiple-choice",
+            question:
+              "What is the longest cave system in the world, located in Kentucky?",
+            mascotComment:
+              "It's so big, explorers are still discovering new parts of it!",
+            icon: "lucide:layout-grid",
+            options: [
+              {
+                id: "a",
+                text: "Wind Cave",
+                icon: "lucide:wind",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Mammoth Cave",
+                icon: "lucide:binary",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Carlsbad Caverns",
+                icon: "lucide:mountain",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Mammoth Cave National Park preserves a cave system with over 400 miles of explored passageways.",
+          },
+          {
+            id: "n10",
+            type: "order",
+            question:
+              "Order these ecosystems by the average rainfall they receive (Driest to Wettest)",
+            mascotComment: "From the thirsty sands to the soaking forests!",
+            icon: "lucide:cloud-rain",
+            options: [
+              { id: "e1", text: "Mojave Desert", icon: "lucide:sun" },
+              { id: "e2", text: "Great Plains", icon: "lucide:wheat" },
+              {
+                id: "e3",
+                text: "Olympic Temperate Rainforest",
+                icon: "lucide:droplets",
+              },
+            ],
+            correctOrder: ["e1", "e2", "e3"],
+            explanation:
+              "Deserts receive very little rain, while the Olympic Peninsula in Washington is one of the wettest places in the continental U.S.",
+          },
+        ],
+      },
+      {
+        id: "festivals",
+        name: "Spirituality",
+        icon: "lucide:sparkles",
+        color: "bg-pink-500",
+        shadow: "shadow-[0_6px_0_0_rgba(236,72,153,1)]",
+        quiz: [
+          {
+            id: "f1",
+            type: "multiple-choice",
+            question:
+              "On which date does the USA celebrate its Independence Day?",
+            mascotComment: "Think of fireworks and barbecues in July!",
+            icon: "lucide:calendar",
+            options: [
+              {
+                id: "a",
+                text: "July 4th",
+                icon: "lucide:flag",
+                isCorrect: true,
+              },
+              {
+                id: "b",
+                text: "November 25th",
+                icon: "lucide:leaf",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "January 1st",
+                icon: "lucide:clock",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Independence Day commemorates the adoption of the Declaration of Independence on July 4, 1776.",
+          },
+          {
+            id: "f2",
+            type: "order",
+            question:
+              "Order these American holidays by when they occur in a calendar year",
+            mascotComment: "From New Year's to the end of the year!",
+            icon: "lucide:list-ordered",
+            options: [
+              { id: "h1", text: "Independence Day", icon: "lucide:flame" },
+              { id: "h2", text: "Halloween", icon: "lucide:ghost" },
+              { id: "h3", text: "Thanksgiving", icon: "lucide:pie-chart" },
+            ],
+            correctOrder: ["h1", "h2", "h3"],
+            explanation:
+              "Independence Day is in July, Halloween is in October, and Thanksgiving is in November.",
+          },
+
+          {
+            id: "f3",
+            type: "multiple-choice",
+            question:
+              "Which holiday is celebrated on the third Monday of January to honor a famous civil rights leader?",
+            mascotComment: "He had a very famous dream for the future!",
+            icon: "lucide:megaphone",
+            options: [
+              {
+                id: "a",
+                text: "Presidents' Day",
+                icon: "lucide:landmark",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Martin Luther King Jr. Day",
+                icon: "lucide:heart",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Memorial Day",
+                icon: "lucide:flag",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "MLK Day honors the life and legacy of Dr. Martin Luther King Jr., who was a leader in the movement to end racial segregation and promote equality.",
+          },
+          {
+            id: "f4",
+            type: "true-false",
+            question:
+              "Thanksgiving is traditionally celebrated on the last Thursday of November.",
+            mascotComment: "It's a time for gratitude and a big feast!",
+            icon: "lucide:utensils",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: true },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: false },
+            ],
+            explanation:
+              "Thanksgiving was officially established as the fourth Thursday in November by federal law in 1941, focusing on giving thanks and family gatherings.",
+          },
+          {
+            id: "f5",
+            type: "multiple-choice",
+            question:
+              "Which of these is a major tradition during the New Year's Eve celebration in New York City?",
+            mascotComment:
+              "Millions watch this happen at midnight in Times Square!",
+            icon: "lucide:timer",
+            options: [
+              {
+                id: "a",
+                text: "The Ball Drop",
+                icon: "lucide:circle-dot",
+                isCorrect: true,
+              },
+              {
+                id: "b",
+                text: "The Rose Parade",
+                icon: "lucide:flower-2",
+                isCorrect: false,
+              },
+              {
+                id: "c",
+                text: "The Turkey Trot",
+                icon: "lucide:bird",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "The lowering of the 'Big Ball' in Times Square has been a New Year's Eve tradition since 1907, symbolizing the countdown to the start of the new year.",
+          },
+          {
+            id: "f6",
+            type: "order",
+            question:
+              "Order these holidays by the season in which they occur (Spring to Winter)",
+            mascotComment: "Follow the change in weather!",
+            icon: "lucide:cloud-sun",
+            options: [
+              {
+                id: "s1",
+                text: "Memorial Day (Late May)",
+                icon: "lucide:flower",
+              },
+              {
+                id: "s2",
+                text: "Labor Day (September)",
+                icon: "lucide:hammer",
+              },
+              {
+                id: "s3",
+                text: "Christmas (December)",
+                icon: "lucide:snowflake",
+              },
+            ],
+            correctOrder: ["s1", "s2", "s3"],
+            explanation:
+              "Memorial Day kicks off the summer season in late spring, Labor Day marks the end of summer in early autumn, and Christmas occurs in winter.",
+          },
+          {
+            id: "f7",
+            type: "multiple-choice",
+            question:
+              "What is the name of the festival celebrated in New Orleans with masks, music, and parades?",
+            mascotComment: "It translates to 'Fat Tuesday' in French!",
+            icon: "lucide:party-popper",
+            options: [
+              {
+                id: "a",
+                text: "Coachella",
+                icon: "lucide:music",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "Mardi Gras",
+                icon: "lucide:drama",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Burning Man",
+                icon: "lucide:flame",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "Mardi Gras is a famous cultural celebration in Louisiana featuring elaborate costumes and parades before the start of the Lenten season.",
+          },
+          {
+            id: "f8",
+            type: "true-false",
+            question:
+              "The National Mall in Washington D.C. is a large shopping center.",
+            mascotComment: "It's home to many museums and monuments!",
+            icon: "lucide:landmark",
+            options: [
+              { id: "a", text: "True", icon: "lucide:check", isCorrect: false },
+              { id: "b", text: "False", icon: "lucide:x", isCorrect: true },
+            ],
+            explanation:
+              "The National Mall is actually an open-air national park containing the Lincoln Memorial, Washington Monument, and the Smithsonian museums.",
+          },
+          {
+            id: "f9",
+            type: "multiple-choice",
+            question:
+              "Which of these icons was a gift from France to the USA as a symbol of freedom?",
+            mascotComment: "She holds a torch high in New York Harbor!",
+            icon: "lucide:flame",
+            options: [
+              {
+                id: "a",
+                text: "The Liberty Bell",
+                icon: "lucide:bell",
+                isCorrect: false,
+              },
+              {
+                id: "b",
+                text: "The Statue of Liberty",
+                icon: "lucide:shrine",
+                isCorrect: true,
+              },
+              {
+                id: "c",
+                text: "Mount Rushmore",
+                icon: "lucide:mountain",
+                isCorrect: false,
+              },
+            ],
+            explanation:
+              "The Statue of Liberty was dedicated in 1886 as a gift of friendship from the people of France to commemorate the centennial of the Declaration of Independence.",
+          },
+          {
+            id: "f10",
+            type: "order",
+            question:
+              "Order these US presidents by when they served (Earliest to Latest)",
+            mascotComment: "Think back to the founding of the nation!",
+            icon: "lucide:users",
+            options: [
+              { id: "p1", text: "George Washington", icon: "lucide:crown" },
+              { id: "p2", text: "Abraham Lincoln", icon: "lucide:axe" },
+              { id: "p3", text: "John F. Kennedy", icon: "lucide:rocket" },
+            ],
+            correctOrder: ["p1", "p2", "p3"],
+            explanation:
+              "Washington was the 1st president (1789), Lincoln was the 16th (1861), and Kennedy was the 35th (1961).",
+          },
+        ],
+      },
+    ],
   },
   {
     id: "japan",
     name: "Japan",
     continent: "Asia",
-    tagline: "Land of rising sun",
+    tagline: "Land of the Rising Sun",
     stampIcon: "emojione:flag-for-japan",
-    lessons: [],
+    lessons: [
+      {
+        id: "geo",
+        name: "Geography",
+        icon: "lucide:map",
+        color: "bg-blue-500",
+        shadow: "shadow-[0_6px_0_0_rgba(59,130,246,1)]",
+        quiz: [
+          {
+            id: "g1",
+            type: "multiple-choice",
+            question:
+              "Japan is an archipelago. How many main islands make up the country?",
+            mascotComment: "Think of the big four!",
+            icon: "lucide:layers",
+            options: [
+              { id: "a", text: "3 Islands", isCorrect: false },
+              { id: "b", text: "4 Islands", isCorrect: true },
+              { id: "c", text: "5 Islands", isCorrect: false },
+            ],
+            explanation:
+              "Japan's four main islands are Honshu, Hokkaido, Kyushu, and Shikoku.",
+          },
+          {
+            id: "g2",
+            type: "true-false",
+            question: "Mount Fuji is the highest mountain in Japan.",
+            mascotComment: "It's a very famous volcano!",
+            icon: "lucide:mountain",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Standing at 3,776 meters, Mount Fuji is Japan's tallest peak and an iconic symbol of the nation.",
+          },
+          {
+            id: "g3",
+            type: "order",
+            question: "Order these Japanese cities from North to South.",
+            mascotComment: "Start in the snowy north!",
+            icon: "lucide:move-down",
+            options: [
+              { id: "c1", text: "Sapporo", icon: "lucide:snowflake" },
+              { id: "c2", text: "Tokyo", icon: "lucide:building-2" },
+              { id: "c3", text: "Fukuoka", icon: "lucide:palm-tree" },
+            ],
+            correctOrder: ["c1", "c2", "c3"],
+            explanation:
+              "Sapporo is in Hokkaido (North), Tokyo is in the center (Honshu), and Fukuoka is in the South (Kyushu).",
+          },
+          {
+            id: "g4",
+            type: "multiple-choice",
+            question: "Which body of water lies to the West of Japan?",
+            icon: "lucide:waves",
+            options: [
+              { id: "a", text: "Sea of Japan", isCorrect: true },
+              { id: "b", text: "Pacific Ocean", isCorrect: false },
+              { id: "c", text: "Indian Ocean", isCorrect: false },
+            ],
+            explanation:
+              "The Sea of Japan separates the archipelago from the Asian continent.",
+          },
+          {
+            id: "g5",
+            type: "true-false",
+            question: "Japan is located on the 'Ring of Fire'.",
+            icon: "lucide:flame",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "This is why Japan has many volcanoes and frequent earthquakes.",
+          },
+          {
+            id: "g6",
+            type: "multiple-choice",
+            question: "What is the capital city of Japan?",
+            icon: "lucide:map-pin",
+            options: [
+              { id: "a", text: "Kyoto", isCorrect: false },
+              { id: "b", text: "Osaka", isCorrect: false },
+              { id: "c", text: "Tokyo", isCorrect: true },
+            ],
+            explanation: "Tokyo is the political and economic heart of Japan.",
+          },
+          {
+            id: "g7",
+            type: "order",
+            question:
+              "Rank these Japanese islands by size (Largest to Smallest).",
+            icon: "lucide:maximize",
+            options: [
+              { id: "i1", text: "Honshu" },
+              { id: "i2", text: "Hokkaido" },
+              { id: "i3", text: "Shikoku" },
+            ],
+            correctOrder: ["i1", "i2", "i3"],
+            explanation: "Honshu is the largest and most populous island.",
+          },
+          {
+            id: "g8",
+            type: "multiple-choice",
+            question:
+              "Which season is Japan most famous for its blooming cherry blossoms?",
+            icon: "lucide:flower",
+            options: [
+              { id: "a", text: "Autumn", isCorrect: false },
+              { id: "b", text: "Spring", isCorrect: true },
+              { id: "c", text: "Summer", isCorrect: false },
+            ],
+            explanation:
+              "Sakura (cherry blossom) season usually occurs in late March and April.",
+          },
+          {
+            id: "g9",
+            type: "true-false",
+            question:
+              "The Japanese Alps are located on the island of Hokkaido.",
+            icon: "lucide:mountain-snow",
+            options: [
+              { id: "a", text: "True", isCorrect: false },
+              { id: "b", text: "False", isCorrect: true },
+            ],
+            explanation:
+              "The Japanese Alps are actually located on the main island of Honshu.",
+          },
+          {
+            id: "g10",
+            type: "multiple-choice",
+            question: "What percentage of Japan's land is mountainous?",
+            icon: "lucide:terrain",
+            options: [
+              { id: "a", text: "About 30%", isCorrect: false },
+              { id: "b", text: "About 70%", isCorrect: true },
+              { id: "c", text: "About 90%", isCorrect: false },
+            ],
+            explanation:
+              "Roughly 70-80% of Japan is mountainous, which is why cities are so densely packed in the plains.",
+          },
+        ],
+      },
+      {
+        id: "history",
+        name: "History",
+        icon: "lucide:scroll",
+        color: "bg-red-600",
+        shadow: "shadow-[0_6px_0_0_rgba(220,38,38,1)]",
+        quiz: [
+          {
+            id: "h1",
+            type: "multiple-choice",
+            question: "What was the name of the warrior class in feudal Japan?",
+            mascotComment: "They followed the code of Bushido!",
+            icon: "lucide:shield",
+            options: [
+              { id: "a", text: "Ninja", isCorrect: false },
+              { id: "b", text: "Samurai", isCorrect: true },
+              { id: "c", text: "Shogun", isCorrect: false },
+            ],
+            explanation:
+              "Samurai were the military nobility and officer caste of medieval and early-modern Japan.",
+          },
+          {
+            id: "h2",
+            type: "order",
+            question:
+              "Order these eras of Japanese history from oldest to most recent.",
+            mascotComment: "Time travel starting from the ancient past!",
+            icon: "lucide:history",
+            options: [
+              { id: "e1", text: "Edo Period (Samurai)", icon: "lucide:sword" },
+              {
+                id: "e2",
+                text: "Meiji Era (Modernization)",
+                icon: "lucide:cog",
+              },
+              { id: "e3", text: "Reiwa Era (Current)", icon: "lucide:crown" },
+            ],
+            correctOrder: ["e1", "e2", "e3"],
+            explanation:
+              "The Edo period was feudal, Meiji was the industrial revolution, and Reiwa is the current era.",
+          },
+          {
+            id: "h3",
+            type: "true-false",
+            question: "Kyoto was once the capital of Japan.",
+            icon: "lucide:landmark",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Kyoto served as the imperial capital for over 1,000 years before it moved to Tokyo.",
+          },
+          {
+            id: "h4",
+            type: "multiple-choice",
+            question: "Who was the first Shogun to unify Japan in the 1600s?",
+            icon: "lucide:user",
+            options: [
+              { id: "a", text: "Tokugawa Ieyasu", isCorrect: true },
+              { id: "b", text: "Oda Nobunaga", isCorrect: false },
+              { id: "c", text: "Toyotomi Hideyoshi", isCorrect: false },
+            ],
+            explanation:
+              "Ieyasu founded the Tokugawa Shogunate which ruled for 250 years.",
+          },
+          {
+            id: "h5",
+            type: "true-false",
+            question:
+              "Japan remained closed to most foreigners for over 200 years.",
+            icon: "lucide:lock",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation: "This policy was called 'Sakoku' (chained country).",
+          },
+          {
+            id: "h6",
+            type: "multiple-choice",
+            question: "The Meiji Restoration returned power to whom?",
+            icon: "lucide:crown",
+            options: [
+              { id: "a", text: "The Samurai", isCorrect: false },
+              { id: "b", text: "The Emperor", isCorrect: true },
+              { id: "c", text: "The People", isCorrect: false },
+            ],
+            explanation: "It ended the Shogunate and restored imperial rule.",
+          },
+          {
+            id: "h7",
+            type: "order",
+            question:
+              "Order these capitals by when they served Japan (Earliest to Latest).",
+            icon: "lucide:list-ordered",
+            options: [
+              { id: "cp1", text: "Nara" },
+              { id: "cp2", text: "Kyoto" },
+              { id: "cp3", text: "Tokyo" },
+            ],
+            correctOrder: ["cp1", "cp2", "cp3"],
+            explanation:
+              "Nara was the first permanent capital, followed by Kyoto, then Tokyo.",
+          },
+          {
+            id: "h8",
+            type: "multiple-choice",
+            question: "In what year did the Olympic Games first come to Tokyo?",
+            icon: "lucide:trophy",
+            options: [
+              { id: "a", text: "1944", isCorrect: false },
+              { id: "b", text: "1964", isCorrect: true },
+              { id: "c", text: "1984", isCorrect: false },
+            ],
+            explanation:
+              "The 1964 Tokyo Olympics signaled Japan's return to the global stage after WWII.",
+          },
+          {
+            id: "h9",
+            type: "true-false",
+            question:
+              "The Samurai were officially abolished during the Meiji Restoration.",
+            icon: "lucide:scissors",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "To modernize the military, the samurai class's special privileges were removed.",
+          },
+          {
+            id: "h10",
+            type: "multiple-choice",
+            question:
+              "What is the name of the traditional Japanese garment worn since the Heian period?",
+            icon: "lucide:shirt",
+            options: [
+              { id: "a", text: "Kimono", isCorrect: true },
+              { id: "b", text: "Hanfu", isCorrect: false },
+              { id: "c", text: "Sari", isCorrect: false },
+            ],
+            explanation:
+              "The Kimono is the traditional dress and a symbol of Japanese culture.",
+          },
+        ],
+      },
+      {
+        id: "food",
+        name: "Food",
+        icon: "lucide:utensils",
+        color: "bg-rose-500",
+        shadow: "shadow-[0_6px_0_0_rgba(244,63,94,1)]",
+        quiz: [
+          {
+            id: "f1",
+            type: "multiple-choice",
+            question:
+              "What is the primary ingredient in authentic Japanese Miso soup?",
+            mascotComment: "It's a fermented paste!",
+            icon: "lucide:soup",
+            options: [
+              { id: "a", text: "Lentils", isCorrect: false },
+              { id: "b", text: "Soybeans", isCorrect: true },
+              { id: "c", text: "Rice Flour", isCorrect: false },
+            ],
+            explanation:
+              "Miso is made from fermented soybeans, salt, and koji (a type of fungus).",
+          },
+          {
+            id: "f2",
+            type: "true-false",
+            question: "Wasabi grows naturally in mountain river valleys.",
+            mascotComment: "It likes cold, clean water!",
+            icon: "lucide:leaf",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Real wasabi is difficult to grow and thrives in cool stream beds.",
+          },
+          {
+            id: "f3",
+            type: "order",
+            question:
+              "Order these Japanese dishes from light snack to full meal.",
+            icon: "lucide:list",
+            options: [
+              { id: "d1", text: "Edamame", icon: "lucide:dot" },
+              { id: "d2", text: "Sushi Platter", icon: "lucide:fish" },
+              { id: "d3", text: "Tonkatsu Bento", icon: "lucide:box" },
+            ],
+            correctOrder: ["d1", "d2", "d3"],
+            explanation:
+              "Edamame are appetizers, sushi is a main course, and a Bento is a complete boxed meal.",
+          },
+          {
+            id: "f4",
+            type: "multiple-choice",
+            question: "What is 'Sashimi'?",
+            icon: "lucide:slice",
+            options: [
+              { id: "a", text: "Rice with fish", isCorrect: false },
+              { id: "b", text: "Thinly sliced raw fish", isCorrect: true },
+              { id: "c", text: "Grilled eel", isCorrect: false },
+            ],
+            explanation:
+              "Unlike Sushi, Sashimi is just the fish without the vinegar-flavored rice.",
+          },
+          {
+            id: "f5",
+            type: "true-false",
+            question:
+              "In Japan, it is considered polite to slurp your noodles.",
+            icon: "lucide:wind",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Slurping shows that you are enjoying the meal and helps cool the hot noodles.",
+          },
+          {
+            id: "f6",
+            type: "multiple-choice",
+            question:
+              "What is the name of the popular octopus-filled savory ball snack?",
+            icon: "lucide:circle",
+            options: [
+              { id: "a", text: "Takoyaki", isCorrect: true },
+              { id: "b", text: "Okonomiyaki", isCorrect: false },
+              { id: "c", text: "Taiyaki", isCorrect: false },
+            ],
+            explanation:
+              "Takoyaki is a famous street food originating from Osaka.",
+          },
+          {
+            id: "f7",
+            type: "order",
+            question:
+              "Order these tea types by their level of processing (Least to Most).",
+            icon: "lucide:coffee",
+            options: [
+              { id: "t1", text: "Matcha (Powdered)" },
+              { id: "t2", text: "Sencha (Green Tea)" },
+              { id: "t3", text: "Hojicha (Roasted)" },
+            ],
+            correctOrder: ["t2", "t1", "t3"],
+            explanation:
+              "Sencha is standard green tea, Matcha is ground leaf, and Hojicha is roasted.",
+          },
+          {
+            id: "f8",
+            type: "multiple-choice",
+            question: "What kind of noodles are used in traditional Ramen?",
+            icon: "lucide:tally-4",
+            options: [
+              { id: "a", text: "Wheat Noodles", isCorrect: true },
+              { id: "b", text: "Buckwheat Noodles", isCorrect: false },
+              { id: "c", text: "Rice Noodles", isCorrect: false },
+            ],
+            explanation: "Ramen uses wheat noodles, while Soba uses buckwheat.",
+          },
+          {
+            id: "f9",
+            type: "true-false",
+            question:
+              "Green tea is often served for free in Japanese restaurants.",
+            icon: "lucide:cup-soda",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation: "It is a standard part of hospitality in Japan.",
+          },
+          {
+            id: "f10",
+            type: "multiple-choice",
+            question: "What is 'Umami'?",
+            icon: "lucide:sparkle",
+            options: [
+              { id: "a", text: "A type of fish", isCorrect: false },
+              { id: "b", text: "The fifth basic taste", isCorrect: true },
+              { id: "c", text: "A cooking technique", isCorrect: false },
+            ],
+            explanation:
+              "Umami is the savory 'fifth taste' found in foods like soy sauce and seaweed.",
+          },
+        ],
+      },
+      {
+        id: "culture",
+        name: "Culture",
+        icon: "lucide:palette",
+        color: "bg-purple-500",
+        shadow: "shadow-[0_6px_0_0_rgba(168,85,247,1)]",
+        quiz: [
+          {
+            id: "c1",
+            type: "multiple-choice",
+            question: "What is the Japanese art of paper folding called?",
+            mascotComment: "Try making a crane!",
+            icon: "lucide:shapes",
+            options: [
+              { id: "a", text: "Ikebana", isCorrect: false },
+              { id: "b", text: "Origami", isCorrect: true },
+              { id: "c", text: "Bonsai", isCorrect: false },
+            ],
+            explanation:
+              "Origami comes from 'ori' (folding) and 'kami' (paper).",
+          },
+          {
+            id: "c2",
+            type: "true-false",
+            question: "Shinto is an indigenous religion of Japan.",
+            mascotComment: "It's all about spirits in nature!",
+            icon: "lucide:shrine",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Shinto focuses on ritual practices to be carried out diligently to establish a connection between present-day Japan and its ancient past.",
+          },
+          {
+            id: "c3",
+            type: "order",
+            question:
+              "Order these modern Japanese icons by their global release year (Earliest to Latest).",
+            icon: "lucide:smartphone",
+            options: [
+              { id: "m1", text: "Hello Kitty" },
+              { id: "m2", text: "Super Mario" },
+              { id: "m3", text: "Pokémon" },
+            ],
+            correctOrder: ["m1", "m2", "m3"],
+            explanation:
+              "Hello Kitty (1974), Mario (1981/1985), and Pokémon (1996).",
+          },
+          {
+            id: "c4",
+            type: "multiple-choice",
+            question: "What is a 'Kimono'?",
+            icon: "lucide:shirt",
+            options: [
+              { id: "a", text: "A type of tea", isCorrect: false },
+              { id: "b", text: "Traditional clothing", isCorrect: true },
+              { id: "c", text: "A martial art", isCorrect: false },
+            ],
+            explanation: "Kimono literally translates to 'thing to wear'.",
+          },
+          {
+            id: "c5",
+            type: "true-false",
+            question: "Bowing is the standard way to greet someone in Japan.",
+            icon: "lucide:user",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Bowing (ojigi) is used for greetings, thanks, and apologies.",
+          },
+          {
+            id: "c6",
+            type: "multiple-choice",
+            question: "What is the name for Japanese comics?",
+            icon: "lucide:book-open",
+            options: [
+              { id: "a", text: "Anime", isCorrect: false },
+              { id: "b", text: "Manga", isCorrect: true },
+              { id: "c", text: "Manhwa", isCorrect: false },
+            ],
+            explanation:
+              "Manga refers to printed comics, while Anime refers to animation.",
+          },
+          {
+            id: "c7",
+            type: "order",
+            question:
+              "Order these martial arts by their typical focus (Grappling to Striking).",
+            icon: "lucide:swords",
+            options: [
+              { id: "ma1", text: "Judo" },
+              { id: "ma2", text: "Aikido" },
+              { id: "ma3", text: "Karate" },
+            ],
+            correctOrder: ["ma1", "ma2", "ma3"],
+            explanation:
+              "Judo is focused on throws, Aikido on redirection, and Karate on strikes.",
+          },
+          {
+            id: "c8",
+            type: "multiple-choice",
+            question: "Which of these is a traditional Japanese instrument?",
+            icon: "lucide:music",
+            options: [
+              { id: "a", text: "Sitar", isCorrect: false },
+              { id: "b", text: "Shamisen", isCorrect: true },
+              { id: "c", text: "Didgeridoo", isCorrect: false },
+            ],
+            explanation:
+              "The Shamisen is a three-stringed traditional musical instrument.",
+          },
+          {
+            id: "c9",
+            type: "true-false",
+            question:
+              "Ghibli Museum is dedicated to the works of Studio Ghibli.",
+            icon: "lucide:film",
+            options: [
+              { id: "a", text: "True", isCorrect: true },
+              { id: "b", text: "False", isCorrect: false },
+            ],
+            explanation:
+              "Located in Mitaka, it celebrates the animation of Hayao Miyazaki and his team.",
+          },
+          {
+            id: "c10",
+            type: "multiple-choice",
+            question: "What is the 'Golden Week' in Japan?",
+            icon: "lucide:calendar",
+            options: [
+              { id: "a", text: "Harvest festival", isCorrect: false },
+              { id: "b", text: "Series of four holidays", isCorrect: true },
+              { id: "c", text: "A tech summit", isCorrect: false },
+            ],
+            explanation:
+              "Golden Week is a period containing several national holidays within seven days.",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -2824,6 +4368,200 @@ export const chapters = [
             "Just like the diverse culture, Holi in Nepal is a vibrant explosion of colors and water to celebrate spring!",
           illustration: "lucide:palette",
           accentColor: "bg-violet-500",
+        },
+      ],
+    },
+  },
+  {
+    id: "usa",
+    information: {
+      geo: [
+        {
+          title: "Diverse Landscapes",
+          content:
+            "From the frozen tundra of Alaska to the tropical beaches of Florida, the USA spans nearly every climate found on Earth.",
+          illustration: "lucide:map",
+          accentColor: "bg-blue-500",
+        },
+        {
+          title: "The Grand Canyon",
+          content:
+            "Carved by the Colorado River, this massive canyon in Arizona is one of the world's most famous natural wonders.",
+          illustration: "lucide:aperture",
+          accentColor: "bg-orange-600",
+        },
+        {
+          title: "Major Waterways",
+          content:
+            "The Mississippi-Missouri river system forms one of the longest and most important commercial waterways in the world.",
+          illustration: "lucide:waves",
+          accentColor: "bg-cyan-600",
+        },
+      ],
+      modern: [
+        {
+          title: "Silicon Valley",
+          content:
+            "Located in California, this region is the global headquarters for tech giants like Apple, Google, and Meta.",
+          illustration: "lucide:cpu",
+          accentColor: "bg-indigo-500",
+        },
+        {
+          title: "Space Exploration",
+          content:
+            "The USA was the first nation to land humans on the moon and continues to lead in space through NASA and SpaceX.",
+          illustration: "lucide:rocket",
+          accentColor: "bg-slate-800",
+        },
+        {
+          title: "Entertainment Hub",
+          content:
+            "Hollywood and the American music industry influence global pop culture, from blockbuster movies to digital streaming.",
+          illustration: "lucide:film",
+          accentColor: "bg-pink-500",
+        },
+      ],
+      nature: [
+        {
+          title: "National Park System",
+          content:
+            "The USA founded Yellowstone in 1872, creating the world's first national park system to protect wilderness.",
+          illustration: "lucide:trees",
+          accentColor: "bg-emerald-600",
+        },
+        {
+          title: "The Bald Eagle",
+          content:
+            "The national bird of the USA represents strength and freedom, found nesting across North America near large bodies of water.",
+          illustration: "lucide:bird",
+          accentColor: "bg-amber-700",
+        },
+        {
+          title: "Bison of the Plains",
+          content:
+            "The American Bison is the national mammal and was once the primary source of life for many Indigenous tribes.",
+          illustration: "lucide:paw-print",
+          accentColor: "bg-brown-600",
+        },
+      ],
+      festivals: [
+        {
+          title: "Independence Day",
+          content:
+            "Celebrated on July 4th, Americans honor the nation's birth with massive firework displays, parades, and barbecues.",
+          illustration: "lucide:sparkles",
+          accentColor: "bg-red-600",
+        },
+        {
+          title: "Thanksgiving",
+          content:
+            "A uniquely North American holiday where families gather for a large feast to express gratitude for the year's harvest.",
+          illustration: "lucide:pie-chart",
+          accentColor: "bg-orange-500",
+        },
+        {
+          title: "Mardi Gras",
+          content:
+            "Famous in New Orleans, this vibrant carnival involves masks, jazz music, and colorful parades before the season of Lent.",
+          illustration: "lucide:music",
+          accentColor: "bg-purple-600",
+        },
+      ],
+    },
+  },
+  {
+    id: "japan",
+    information: {
+      geo: [
+        {
+          title: "The Archipelago",
+          content:
+            "Japan is a volcanic island chain made of four main islands: Honshu, Hokkaido, Kyushu, and Shikoku.",
+          illustration: "lucide:map",
+          accentColor: "bg-blue-400",
+        },
+        {
+          title: "Mount Fuji",
+          content:
+            "An active volcano and a sacred symbol, Mount Fuji is the highest peak in Japan and a UNESCO World Heritage site.",
+          illustration: "lucide:mountain",
+          accentColor: "bg-slate-400",
+        },
+        {
+          title: "Tectonic Activity",
+          content:
+            "Located on the Ring of Fire, Japan experiences frequent earthquakes and is home to over 100 active volcanoes.",
+          illustration: "lucide:flame",
+          accentColor: "bg-red-500",
+        },
+      ],
+      history: [
+        {
+          title: "The Samurai Era",
+          content:
+            "For centuries, Japan was ruled by powerful military warriors called Samurai who lived by the code of Bushido.",
+          illustration: "lucide:sword",
+          accentColor: "bg-stone-700",
+        },
+        {
+          title: "Edo Period",
+          content:
+            "Japan remained closed to the outside world for over 200 years during the Edo period, fostering a unique and isolated culture.",
+          illustration: "lucide:scroll",
+          accentColor: "bg-amber-700",
+        },
+        {
+          title: "The Meiji Restoration",
+          content:
+            "In 1868, Japan rapidly modernized and westernized, transforming from a feudal society into a global power.",
+          illustration: "lucide:landmark",
+          accentColor: "bg-red-800",
+        },
+      ],
+      food: [
+        {
+          title: "Sushi & Sashimi",
+          content:
+            "World-famous Japanese cuisine focuses on fresh, seasonal ingredients and the precise preparation of raw fish.",
+          illustration: "lucide:fish",
+          accentColor: "bg-rose-500",
+        },
+        {
+          title: "Ramen Culture",
+          content:
+            "What started as street food has become a culinary art, with each region of Japan having its own secret broth recipe.",
+          illustration: "lucide:soup",
+          accentColor: "bg-yellow-600",
+        },
+        {
+          title: "Matcha Tea",
+          content:
+            "The traditional tea ceremony is a spiritual practice centered on the preparation and drinking of powdered green tea.",
+          illustration: "lucide:leaf",
+          accentColor: "bg-emerald-500",
+        },
+      ],
+      culture: [
+        {
+          title: "Shinto & Buddhism",
+          content:
+            "Japanese spirituality is a blend of Shinto (belief in nature spirits) and Zen Buddhism (focus on meditation).",
+          illustration: "lucide:shrine",
+          accentColor: "bg-orange-600",
+        },
+        {
+          title: "Anime & Manga",
+          content:
+            "Modern Japan is a global leader in animation and comic arts, influencing pop culture worldwide.",
+          illustration: "lucide:palette",
+          accentColor: "bg-violet-500",
+        },
+        {
+          title: "Omotenashi",
+          content:
+            "The Japanese philosophy of 'wholehearted hospitality' means anticipating a guest's needs before they even arise.",
+          illustration: "lucide:heart",
+          accentColor: "bg-pink-400",
         },
       ],
     },
