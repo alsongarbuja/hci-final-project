@@ -41,7 +41,6 @@ const QuizPage: React.FC = () => {
   const swapyRef = useRef<Swapy | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Data fetching
   const countrySelection = countries.find((c) => c.id === countryId);
   const lessonsArray = countrySelection?.lessons || [];
   const currentLesson = lessonsArray.find((l) => l.id === lessonId);
@@ -49,14 +48,12 @@ const QuizPage: React.FC = () => {
     (currentLesson?.quiz as unknown as QuizQuestion[]) || [];
   const currentQ = quizQuestions[currentIdx];
 
-  // 5. Randomize options on mount or question change
   const randomizedOptions = useMemo(() => {
     if (!currentQ) return [];
     // eslint-disable-next-line react-hooks/purity
     return [...currentQ.options].sort(() => Math.random() - 0.5);
   }, [currentQ]);
 
-  // 2. Initialize Swapy for Drag and Drop
   useEffect(() => {
     if (currentQ?.type === "order" && containerRef.current && !isChecked) {
       swapyRef.current = createSwapy(containerRef.current, {
@@ -71,7 +68,6 @@ const QuizPage: React.FC = () => {
     return () => swapyRef.current?.destroy();
   }, [currentQ, isChecked, randomizedOptions]);
 
-  // Initialize order state
   useEffect(() => {
     if (currentQ?.type === "order") {
       setCurrentOrder(randomizedOptions.map((o) => o.id));
@@ -88,7 +84,6 @@ const QuizPage: React.FC = () => {
       );
       correct = selected?.isCorrect || false;
     } else if (currentQ.type === "order") {
-      // 4. Fix order checking logic
       correct =
         JSON.stringify(currentOrder) === JSON.stringify(currentQ.correctOrder);
     }
@@ -113,13 +108,14 @@ const QuizPage: React.FC = () => {
       const nextLesson = lessonsArray[currentIndex + 1];
       const idToUnlock = nextLesson ? nextLesson.id : lessonId;
 
+      console.log(countryId, lessonId, idToUnlock);
+
       completeLesson(countryId!, lessonId!, idToUnlock!);
       updateScore(countryId!, lessonId!, currentScore);
       navigate(`/lessons/${countryId}`);
     }
   };
 
-  // 3. Fixed Keyboard Controls
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (hearts <= 0) return;
