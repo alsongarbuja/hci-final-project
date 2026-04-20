@@ -17,7 +17,7 @@ interface UserProgress {
   updateScore: (countryId: string, lessonId: string, score: number) => void;
   loseHeart: () => void;
   refillHearts: () => void;
-  recoverHearts: () => void;
+  recoverHearts: (numberOfHearts: number) => void;
 }
 
 export const useStore = create<UserProgress>()(
@@ -99,9 +99,9 @@ export const useStore = create<UserProgress>()(
 
       refillHearts: () => set({ hearts: 10 }),
 
-      recoverHearts: () =>
-        set((state) => ({
-          hearts: Math.min(10, state.hearts + 1),
+      recoverHearts: (numberOfHearts: number) =>
+        set(() => ({
+          hearts: numberOfHearts,
         })),
     }),
     {

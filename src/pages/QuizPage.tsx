@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createSwapy, type Swapy } from "swapy";
@@ -29,7 +29,8 @@ const QuizPage: React.FC = () => {
     countryId: string;
     lessonId: string;
   }>();
-  const { hearts, loseHeart, updateScore, completeLesson } = useStore();
+  const { hearts, loseHeart, updateScore, completeLesson, recoverHearts } =
+    useStore();
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -37,6 +38,10 @@ const QuizPage: React.FC = () => {
   const [currentOrder, setCurrentOrder] = useState<string[]>([]);
   const [isChecked, setIsChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+  // Modal States
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
 
   const swapyRef = useRef<Swapy | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -54,25 +59,23 @@ const QuizPage: React.FC = () => {
     return [...currentQ.options].sort(() => Math.random() - 0.5);
   }, [currentQ]);
 
+  // Handle Hearts Empty
   useEffect(() => {
-    if (currentQ?.type === "order" && containerRef.current && !isChecked) {
-      swapyRef.current = createSwapy(containerRef.current, {
-        animation: "spring",
-      });
-
-      swapyRef.current.onSwap((event) => {
-        const newOrder = event.newSlotItemMap.asArray.map((item) => item.item);
-        setCurrentOrder(newOrder);
-      });
+    if (hearts <= 0) {
+      setShowGameOver(true);
     }
-    return () => swapyRef.current?.destroy();
-  }, [currentQ, isChecked, randomizedOptions]);
+  }, [hearts]);
 
-  useEffect(() => {
-    if (currentQ?.type === "order") {
-      setCurrentOrder(randomizedOptions.map((o) => o.id));
-    }
-  }, [randomizedOptions, currentQ]);
+  const handleRetake = () => {
+    recoverHearts(3);
+    setCurrentIdx(0);
+    setCurrentScore(0);
+    setSelectedOption(null);
+    setIsChecked(false);
+    setIsCorrect(null);
+    setShowGameOver(false);
+    setShowComplete(false);
+  };
 
   const handleCheck = () => {
     if (isChecked || hearts <= 0) return;
@@ -110,9 +113,28 @@ const QuizPage: React.FC = () => {
 
       completeLesson(countryId!, lessonId!, idToUnlock!);
       updateScore(countryId!, lessonId!, currentScore);
-      navigate(`/lessons/${countryId}`);
+      setShowComplete(true);
     }
   };
+
+  useEffect(() => {
+    if (currentQ?.type === "order" && containerRef.current && !isChecked) {
+      swapyRef.current = createSwapy(containerRef.current, {
+        animation: "spring",
+      });
+      swapyRef.current.onSwap((event) => {
+        const newOrder = event.newSlotItemMap.asArray.map((item) => item.item);
+        setCurrentOrder(newOrder);
+      });
+    }
+    return () => swapyRef.current?.destroy();
+  }, [currentQ, isChecked, randomizedOptions]);
+
+  useEffect(() => {
+    if (currentQ?.type === "order") {
+      setCurrentOrder(randomizedOptions.map((o) => o.id));
+    }
+  }, [randomizedOptions, currentQ]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -150,41 +172,11 @@ const QuizPage: React.FC = () => {
     randomizedOptions,
   ]);
 
-  if (hearts <= 0) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
-          <Icon icon="twemoji:broken-heart" className="text-9xl mb-6" />
-        </motion.div>
-        <h1 className="text-4xl font-black text-slate-800 mb-4 uppercase">
-          Out of Hearts!
-        </h1>
-        <p className="text-xl text-slate-600 font-bold mb-8 max-w-md">
-          You've run out of lives. Go back to the lessons to review the material
-          and regain your energy!
-        </p>
-        <div className="flex flex-col w-full max-w-xs gap-4">
-          <button
-            onClick={() => navigate(`/lessons/${countryId}`)}
-            className="py-4 bg-emerald-500 text-white rounded-2xl font-black shadow-[0_5px_0_0_rgba(5,150,105,1)] uppercase"
-          >
-            Back to Lesson
-          </button>
-          <button
-            onClick={() => navigate("/")}
-            className="py-4 bg-slate-100 text-slate-500 rounded-2xl font-black uppercase"
-          >
-            Home
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   if (!currentQ) return null;
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans overflow-hidden">
+      {/* Header */}
       <header className="max-w-4xl mx-auto w-full px-6 py-6 flex items-center gap-6">
         <button onClick={() => navigate(-1)} className="text-slate-400">
           <Icon icon="lucide:x" className="text-3xl" />
@@ -202,6 +194,7 @@ const QuizPage: React.FC = () => {
         </div>
       </header>
 
+      {/* Main Content */}
       <main className="grow max-w-2xl mx-auto w-full px-6 py-4 flex flex-col">
         <div className="flex items-start gap-4 mb-8">
           <div className="w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center shrink-0">
@@ -240,7 +233,6 @@ const QuizPage: React.FC = () => {
                       icon="lucide:grip-vertical"
                       className="text-slate-400"
                     />
-                    {/* 1. Text color set to slate-800 (Black) */}
                     <span className="font-bold text-slate-800 text-lg">
                       {option.text}
                     </span>
@@ -272,6 +264,7 @@ const QuizPage: React.FC = () => {
         )}
       </main>
 
+      {/* Footer */}
       <footer
         className={`border-t-2 p-6 transition-colors ${!isChecked ? "bg-white" : isCorrect ? "bg-emerald-100" : "bg-rose-100"}`}
       >
@@ -293,9 +286,10 @@ const QuizPage: React.FC = () => {
           <button
             onClick={isChecked ? handleNext : handleCheck}
             disabled={
-              currentQ.type === "multiple-choice" &&
-              !selectedOption &&
-              !isChecked
+              (currentQ.type === "multiple-choice" &&
+                !selectedOption &&
+                !isChecked) ||
+              showGameOver
             }
             className={`px-12 py-4 rounded-2xl font-black text-lg uppercase transition-all ${
               selectedOption || currentQ.type === "order" || isChecked
@@ -307,6 +301,106 @@ const QuizPage: React.FC = () => {
           </button>
         </div>
       </footer>
+
+      {/* MODALS */}
+      <AnimatePresence>
+        {/* 1. Game Over Modal */}
+        {showGameOver && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-6"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-white rounded-[3rem] p-10 max-w-sm w-full text-center shadow-2xl"
+            >
+              <Icon
+                icon="twemoji:broken-heart"
+                className="text-8xl mx-auto mb-6"
+              />
+              <h2 className="text-3xl font-black text-slate-800 uppercase tracking-tight mb-2">
+                Out of Hearts!
+              </h2>
+              <p className="font-bold text-slate-500 mb-8">
+                Review the lesson to regain energy, or try again with 3 full
+                hearts!
+              </p>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={handleRetake}
+                  className="py-4 bg-emerald-500 text-white rounded-2xl font-black uppercase shadow-[0_5px_0_0_rgba(5,150,105,1)] active:translate-y-1 active:shadow-none transition-all"
+                >
+                  Retake Quiz (3 Hearts)
+                </button>
+                <button
+                  onClick={() => navigate(`/lessons/${countryId}`)}
+                  className="py-4 bg-slate-100 text-slate-500 rounded-2xl font-black uppercase hover:bg-slate-200 transition-all"
+                >
+                  Back to Lesson
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {/* 2. Success Modal */}
+        {showComplete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 bg-emerald-500/95 flex items-center justify-center p-6"
+          >
+            <motion.div
+              initial={{ scale: 0.8, rotate: -5 }}
+              animate={{ scale: 1, rotate: 0 }}
+              className="bg-white rounded-[3rem] p-10 max-w-md w-full text-center shadow-2xl relative overflow-hidden"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-20 -right-20 text-emerald-100 text-[15rem] opacity-50"
+              >
+                <Icon icon="lucide:sparkles" />
+              </motion.div>
+
+              <div className="relative z-10">
+                <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Icon icon="twemoji:party-popper" className="text-5xl" />
+                </div>
+                <h2 className="text-4xl font-black text-slate-800 uppercase mb-2">
+                  Quiz Finished!
+                </h2>
+                <div className="flex items-center justify-center gap-2 mb-6">
+                  <div className="bg-orange-100 text-orange-600 px-4 py-1 rounded-full font-black text-xl">
+                    +{currentScore} XP
+                  </div>
+                </div>
+                <p className="font-bold text-slate-500 mb-8">
+                  You've mastered this lesson! Ready for the next adventure?
+                </p>
+                <div className="flex flex-col gap-3">
+                  <button
+                    onClick={() => navigate(`/lessons/${countryId}`)}
+                    className="py-4 bg-emerald-500 text-white rounded-2xl font-black uppercase shadow-[0_5px_0_0_rgba(5,150,105,1)]"
+                  >
+                    Finish Lesson
+                  </button>
+                  <button
+                    onClick={handleRetake}
+                    className="py-4 bg-white border-2 border-slate-200 text-slate-400 rounded-2xl font-black uppercase hover:bg-slate-50 transition-all"
+                  >
+                    Retake Quiz
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
