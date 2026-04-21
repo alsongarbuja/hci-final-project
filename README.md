@@ -1,75 +1,70 @@
-# React + TypeScript + Vite
+# Geo Quest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple interactive geography quiz web application inspired by the gamification of [duolingo](https://duolingo.com) for the final project of **Human Computer Interaction** course at SEMO.
 
-Currently, two official plugins are available:
+## Table of content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Features](#1-features)
+- [Development](#2-development)
+  - [Tech Stack](#21-tech-stack)
+  - [Folder Structure](#22-folder-structure)
+- [Production](#3-production)
 
-## React Compiler
+## 1. Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+The website has few features all linked to the ultimate learn and take quiz format of the application.
 
-Note: This will impact Vite dev & build performances.
+1. **Quizes** - Different type of quizes from multiple choice to drag and order and more.
+2. **Lessons** - Bite-sized lessons with gradual reveal of information.
+3. **Gamification** - _Heart_ for sense of limited chances, _xp_ for sense of achievement, and _stamps_ for sense of completion.
 
-## Expanding the ESLint configuration
+## 2. Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+In this section, I will be describing the development process of the web application.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2.1. Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This is a simple frontend only interactvie quiz web app hence the tech stack is very minimal.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+> Main tech
+
+- [React](https://react.dev/) - Framework for component based interactive JS web application
+- [Vite](https://vite.dev/) - Fast JS based application bundler
+- [Tailwindcss](https://tailwindcss.com) - For modular css
+- [Typescript](https://www.typescriptlang.org/) - For type definition and saftey in Javascript
+
+> Libraries
+
+- [React Router](https://reactrouter.com) - For routing and navigation
+- [Zustand](https://zustand.docs.pmnd.rs/learn/getting-started/introduction) - For state management
+- [Localstorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) - Along with zustand for persistent storage
+- [Framer motion](https://www.framer.com/dictionary/framer-motion) - For animations
+- [React simple maps](https://www.react-simple-maps.io/) - For world maps
+- [Swapy](https://swapy.tahazsh.com/) - For drag and drop related interactions
+- [React tooltip](https://react-tooltip.com/) - For tooltip
+
+### 2.2. Folder structure
+
+The folder structure I am following is a straight forward structure with each type of component sepearated in their respective folders.
+
+```
+> public (all the public assets)
+> src (main source code)
+  - App.tsx (main routing page)
+  - index.css (main css file)
+  - main.tsx (entry point)
+  - types.d.ts (global type declaration)
+  > assets (all the assets that is to be optimized by vite)
+  > components (components in the app)
+  > pages (pages of the app)
+  > store (zustand configuration for state management)
+  > utils (utility functions and data list)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2.3. Git and branch
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Since it is a simple college project, I am using a 2-branch policy where the `main` branch is for **CI/CD** pipeline and `dev` branch for development pushes.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 3. Production
+
+The production of this project is a simple automatic CI/CD connection from `GITHUB` to `NETLIFY`.
