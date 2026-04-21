@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Icon } from "@iconify/react"; // Using Iconify as suggested
+import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
 import MapChart from "../components/MapChart";
 
 const questions: Question[] = [
