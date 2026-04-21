@@ -92,7 +92,7 @@ const Header: React.FC = () => {
 
           <Link to="/passports">
             <button className="hidden md:block px-6 py-2 rounded-xl bg-sky-500 text-white font-black shadow-[0_4px_0_0_rgba(14,165,233,1)] active:shadow-none active:translate-y-1 transition-all uppercase text-xs tracking-widest">
-              Profile
+              Badges
             </button>
           </Link>
         </div>

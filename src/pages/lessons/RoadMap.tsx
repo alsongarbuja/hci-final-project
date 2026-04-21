@@ -7,7 +7,14 @@ import { useStore } from "../../store/useStore";
 const CourseMap: React.FC = () => {
   const { countryId } = useParams();
   const country = countries.find((v) => v.id === countryId);
-  const { unlockedLessons, xp, hearts, streak } = useStore();
+  const { unlockedLessons, completedLessons, xp, hearts, streak } = useStore();
+
+  const isCountryCompleted = React.useMemo(() => {
+    if (!country || !completedLessons[countryId!]) return false;
+    return country.lessons.every((lesson) =>
+      completedLessons[countryId!].includes(lesson.id),
+    );
+  }, [country, completedLessons, countryId]);
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 pb-24">
@@ -46,6 +53,7 @@ const CourseMap: React.FC = () => {
 
         {country?.lessons.map((lesson, index) => {
           const xPos = index % 2 === 0 ? (index % 4 === 0 ? 40 : -40) : 0;
+          const isCompleted = completedLessons[countryId!]?.includes(lesson.id);
 
           return (
             <div
@@ -57,9 +65,17 @@ const CourseMap: React.FC = () => {
                 {unlockedLessons[countryId!].includes(lesson.id) ? (
                   <Link
                     to={`${lesson.id}`}
-                    className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl text-white ${lesson.color} ${lesson.shadow} active:translate-y-1 active:shadow-none transition-all`}
+                    className={`relative w-24 h-24 rounded-full flex items-center justify-center text-4xl text-white ${lesson.color} ${lesson.shadow} active:translate-y-1 active:shadow-none transition-all`}
                   >
                     <Icon icon={lesson.icon} className="text-white text-4xl" />
+                    {isCompleted && (
+                      <div className="absolute -top-1 -right-1 bg-white rounded-full p-1 shadow-lg">
+                        <Icon
+                          icon="lucide:check-circle-2"
+                          className="text-emerald-500 text-2xl"
+                        />
+                      </div>
+                    )}
                   </Link>
                 ) : (
                   <div className="w-24 h-24 rounded-full flex items-center justify-center text-4xl bg-slate-200 shadow-[0_6px_0_0_rgba(203,213,225,1)] grayscale opacity-60">
@@ -87,6 +103,33 @@ const CourseMap: React.FC = () => {
             </div>
           );
         })}
+
+        {isCountryCompleted && (
+          <div className="mt-12 w-full px-6 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="bg-linear-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 text-center shadow-xl border-4 border-white">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-4 backdrop-blur-sm">
+                <Icon
+                  icon={country?.stampIcon || "lucide:award"}
+                  className="text-white text-5xl"
+                />
+              </div>
+              <h2 className="text-white text-2xl font-black uppercase tracking-tight mb-2">
+                Course Completed!
+              </h2>
+              <p className="text-emerald-50 text-sm font-bold mb-6">
+                You've mastered {country?.name} and earned your official travel
+                stamp.
+              </p>
+              <Link
+                to="/passports"
+                className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg hover:bg-emerald-50 transition-colors"
+              >
+                <Icon icon="lucide:scroll-text" className="text-lg" />
+                See Passport Badges
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
