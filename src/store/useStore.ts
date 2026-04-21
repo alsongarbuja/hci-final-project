@@ -66,6 +66,7 @@ export const useStore = create<UserProgress>()(
               : {};
 
             return {
+              ...state,
               ...unlockLessonsList,
               completedLessons: {
                 ...state.completedLessons,
@@ -81,6 +82,7 @@ export const useStore = create<UserProgress>()(
         set((state) => {
           const currentBest = state.quizScores[countryId][lessonId] || 0;
           return {
+            ...state,
             xp: state.xp + (score > currentBest ? score - currentBest : 0),
             quizScores: {
               ...state.quizScores,
@@ -100,8 +102,8 @@ export const useStore = create<UserProgress>()(
       refillHearts: () => set({ hearts: 10 }),
 
       recoverHearts: (numberOfHearts: number) =>
-        set(() => ({
-          hearts: numberOfHearts,
+        set((state) => ({
+          hearts: Math.min(10, state.hearts + numberOfHearts),
         })),
     }),
     {

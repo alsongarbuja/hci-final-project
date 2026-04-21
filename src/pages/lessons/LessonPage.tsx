@@ -33,7 +33,7 @@ const LessonPage: React.FC = () => {
     if (!isLastStep) {
       setVisibleSteps((prev) => [...prev, prev.length]);
       if (currentStep === infos.length - 2) {
-        recoverHearts();
+        recoverHearts(2);
       }
     }
   };
