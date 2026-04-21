@@ -39,7 +39,6 @@ const QuizPage: React.FC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-  // Modal States
   const [showGameOver, setShowGameOver] = useState(false);
   const [showComplete, setShowComplete] = useState(false);
 
@@ -59,7 +58,6 @@ const QuizPage: React.FC = () => {
     return [...currentQ.options].sort(() => Math.random() - 0.5);
   }, [currentQ]);
 
-  // Handle Hearts Empty
   useEffect(() => {
     if (hearts <= 0) {
       setShowGameOver(true);
@@ -176,7 +174,6 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans overflow-hidden">
-      {/* Header */}
       <header className="max-w-4xl mx-auto w-full px-6 py-6 flex items-center gap-6">
         <button onClick={() => navigate(-1)} className="text-slate-400">
           <Icon icon="lucide:x" className="text-3xl" />
@@ -194,7 +191,6 @@ const QuizPage: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="grow max-w-2xl mx-auto w-full px-6 py-4 flex flex-col">
         <div className="flex items-start gap-4 mb-8">
           <div className="w-16 h-16 bg-sky-100 rounded-2xl flex items-center justify-center shrink-0">
@@ -264,7 +260,6 @@ const QuizPage: React.FC = () => {
         )}
       </main>
 
-      {/* Footer */}
       <footer
         className={`border-t-2 p-6 transition-colors ${!isChecked ? "bg-white" : isCorrect ? "bg-emerald-100" : "bg-rose-100"}`}
       >
@@ -302,9 +297,7 @@ const QuizPage: React.FC = () => {
         </div>
       </footer>
 
-      {/* MODALS */}
       <AnimatePresence>
-        {/* 1. Game Over Modal */}
         {showGameOver && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -346,7 +339,6 @@ const QuizPage: React.FC = () => {
           </motion.div>
         )}
 
-        {/* 2. Success Modal */}
         {showComplete && (
           <motion.div
             initial={{ opacity: 0 }}

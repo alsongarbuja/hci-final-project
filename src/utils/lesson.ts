@@ -4179,195 +4179,517 @@ export const chapters = [
         {
           title: "The Three Belts",
           content:
-            "Nepal is physically divided into three regions: The Mountains (Himal), the Hills (Pahad), and the Plains (Terai). Each has a totally different climate!",
-          illustration: "lucide:map",
+            "Nepal is physically divided into three horizontal 'belts': the Mountains (Himal), the Hills (Pahad), and the Plains (Terai). Each region has a distinct landscape and climate.",
+          illustration: "lucide:layers",
           accentColor: "bg-emerald-500",
         },
         {
-          title: "The Giant Peaks",
+          title: "The Top of the World",
           content:
-            "Nepal is home to 8 of the 14 highest mountains in the world, including the mighty Mount Everest at 8,848.86m.",
+            "Nepal is home to Mount Everest, the highest peak on Earth. Following the latest 2020 measurement, its official height is recorded as 8,848.86 meters.",
           illustration: "twemoji:mountain",
           accentColor: "bg-sky-500",
         },
         {
           title: "The Tropical Terai",
           content:
-            "Despite being famous for snow, the southern 'Terai' region is a flat, tropical jungle filled with rhinos and elephants!",
-          illustration: "lucide:leaf",
+            "The southern 'Terai' region is a flat, fertile belt. Unlike the snowy north, it is a tropical jungle and home to exotic wildlife like one-horned rhinos and elephants.",
+          illustration: "lucide:shrub",
           accentColor: "bg-green-600",
         },
         {
-          title: "Deepest Gorge",
+          title: "A Landlocked Nation",
           content:
-            "The Kali Gandaki Gorge is one of the deepest in the world, positioned between two massive 8,000m peaks.",
-          illustration: "lucide:waves",
+            "Nepal is a landlocked country, meaning it has no coastline. It is tucked safely between two giants: India to the south and China to the north.",
+          illustration: "lucide:map-pin",
+          accentColor: "bg-orange-500",
+        },
+        {
+          title: "The 8,000m Club",
+          content:
+            "There are only fourteen mountains in the world higher than 8,000 meters, and Nepal remarkably contains 8 of them, including Everest, Kanchenjunga, and Annapurna.",
+          illustration: "lucide:trophy",
           accentColor: "bg-indigo-500",
         },
         {
-          title: "Water Wealth",
+          title: "Deepest River Gorge",
           content:
-            "With over 6,000 rivers, Nepal is one of the richest countries in the world for freshwater and hydropower potential.",
+            "The Kali Gandaki Gorge is one of the deepest river gorges in the world. It flows between the massive peaks of Dhaulagiri and Annapurna.",
+          illustration: "lucide:mountain",
+          accentColor: "bg-blue-600",
+        },
+        {
+          title: "6,000 Rivers",
+          content:
+            "Nepal is incredibly rich in freshwater, with over 6,000 rivers flowing through the country, providing massive potential for hydropower.",
           illustration: "lucide:droplets",
-          accentColor: "bg-blue-400",
+          accentColor: "bg-teal-400",
+        },
+        {
+          title: "The Heart of Nepal",
+          content:
+            "The 'Pahad' (Hill) region sits between the plains and the high mountains. This central heart of the country is where you'll find the most famous valleys and ancient cities.",
+          illustration: "lucide:tent",
+          accentColor: "bg-rose-500",
+        },
+        {
+          title: "The Northern Shield",
+          content:
+            "The Great Himalayan Range forms a massive natural icy border along Nepal's northern frontier, separating the country from the Tibetan Plateau of China.",
+          illustration: "lucide:shield-check",
+          accentColor: "bg-purple-500",
+        },
+        {
+          title: "Tropical to Arctic",
+          content:
+            "In just 200km of distance, Nepal’s climate changes from steaming tropical jungles in the south to frozen arctic conditions in the north—every weather imaginable in one place!",
+          illustration: "lucide:thermometer-sun",
+          accentColor: "bg-pink-500",
         },
       ],
       history: [
         {
-          title: "Ancient Roots",
+          title: "Ancient Beginnings",
           content:
-            "Nepal's history dates back thousands of years, starting with the Kirat dynasty and later the sophisticated Lichhavi era.",
-          illustration: "lucide:scroll",
-          accentColor: "bg-amber-600",
+            "The Kirat Dynasty is recognized as Nepal's first recorded rulers. King Yalambar led this warrior-tribe, establishing a foundation that eventually gave way to the Lichhavi period—an era known for the early development of Nepalese art and culture.",
+          illustration: "lucide:users",
+          accentColor: "bg-emerald-600",
         },
         {
           title: "The Three Kingdoms",
           content:
-            "Before unification, the Kathmandu Valley was split into three rival kingdoms: Kathmandu, Patan, and Bhaktapur.",
-          illustration: "lucide:landmark",
-          accentColor: "bg-orange-700",
+            "During the medieval Malla Era, the Kathmandu Valley was actually split into three independent kingdoms: Kantipur (Kathmandu), Lalitpur (Patan), and Bhaktapur. This was a golden age for architecture, as seen in the famous Durbar Squares.",
+          illustration: "lucide:castle",
+          accentColor: "bg-amber-500",
         },
         {
-          title: "Great Unification",
+          title: "The Great Unification",
           content:
-            "In 1768, King Prithvi Narayan Shah unified the small kingdoms to create the modern nation of Nepal.",
-          illustration: "lucide:shield",
-          accentColor: "bg-red-700",
+            "In 1743 AD, King Prithvi Narayan Shah of Gorkha began a massive campaign to unite the scattered small kingdoms. By capturing the Kathmandu Valley, he laid the foundation for modern-day Nepal and established the Shah Dynasty.",
+          illustration: "lucide:crown",
+          accentColor: "bg-red-600",
+        },
+        {
+          title: "A Sovereign Nation",
+          content:
+            "Nepal is one of the few countries in Asia that was never officially colonized. Despite the Anglo-Nepal War (1814–1816) against the British East India Company, Nepal maintained its independence through military courage and the Treaty of Sugauli.",
+          illustration: "lucide:shield-check",
+          accentColor: "bg-blue-600",
+        },
+        {
+          title: "The Rana Regime",
+          content:
+            "Starting in 1846 AD with Jung Bahadur Rana, the Rana family took control of the government, ruling as hereditary Prime Ministers for 104 years. This period was characterized by the country's relative isolation from the outside world.",
+          illustration: "lucide:hourglass",
+          accentColor: "bg-slate-600",
+        },
+        {
+          title: "The Silk Road Link",
+          content:
+            "For centuries, Nepal served as a vital branch of the ancient Silk Road. It was the primary transit point for trade between India and Tibet, facilitating the exchange of salt, gold, and textiles through high mountain passes.",
+          illustration: "lucide:route",
+          accentColor: "bg-teal-500",
+        },
+        {
+          title: "Journey to Democracy",
+          content:
+            "In 1951, the Rana rule ended, opening the doors to the world. A major People's Movement in 1990 further pushed the country toward a constitutional monarchy, setting the stage for significant political change.",
+          illustration: "lucide:unlock",
+          accentColor: "bg-orange-500",
+        },
+        {
+          title: "Becoming a Republic",
+          content:
+            "One of the most recent major milestones occurred in 2008, when Nepal officially abolished the monarchy and became a Federal Democratic Republic, marking the start of a new chapter in its long history.",
+          illustration: "lucide:party-popper",
+          accentColor: "bg-indigo-500",
         },
       ],
       food: [
         {
+          title: "The National Staple: Dal Bhat",
+          content:
+            "A traditional Nepali meal is incomplete without 'Dal Bhat.' It consists of a large portion of steamed rice (Bhat) accompanied by a bowl of lentil soup (Dal). It's typically rounded out with seasonal vegetable curry and a small, punchy side of spicy pickle (Achar).",
+          illustration: "lucide:soup",
+          accentColor: "bg-emerald-600",
+        },
+        {
           title: "Momo Mania",
           content:
-            "Momos are Nepal's unofficial national dish! They are delicious dumplings filled with meat or veggies and served with spicy chutney.",
-          illustration: "lucide:utensils",
+            "Momos are Nepal's unofficial national snack. These steamed dumplings are filled with minced meat or vegetables and are almost always served with a spicy tomato-based chutney called 'Jhol Achar.' They are the ultimate comfort food found on every street corner.",
+          illustration: "lucide:flame",
           accentColor: "bg-orange-500",
         },
         {
-          title: "Dal Bhat Power",
+          title: "Mountain Energy: Dhido",
           content:
-            "Dal Bhat (lentils and rice) is eaten twice a day by most Nepalis. As the saying goes: 'Dal Bhat Power 24 Hour!'",
-          illustration: "lucide:soup",
+            "In the high-altitude mountain regions, Dhido is the primary energy source. It is a thick, sugar-free dough made by vigorously stirring millet or buckwheat flour into boiling water. It is prized for its nutritional value and long-lasting energy.",
+          illustration: "lucide:bowl",
+          accentColor: "bg-amber-700",
+        },
+        {
+          title: "Fermented Flavors: Gundruk",
+          content:
+            "Gundruk is a unique Nepali delicacy made by fermenting leafy green vegetables like radish or mustard leaves. Once dried, it gains a signature sour profile and is used to make tangy soups or pickles that are rich in probiotics.",
+          illustration: "lucide:leaf",
+          accentColor: "bg-green-700",
+        },
+        {
+          title: "Festive Treats: Yomari & Sel Roti",
+          content:
+            "Nepal's festivals feature unique sweets. The Newar community celebrates with Yomari—fish-shaped rice dumplings filled with sweet 'Chaku.' Meanwhile, Sel Roti—a ring-shaped, deep-fried rice bread—is the star of the Tihar festival of lights.",
+          illustration: "lucide:sparkle",
+          accentColor: "bg-red-500",
+        },
+        {
+          title: "The King of Yogurt",
+          content:
+            "Hailing from the ancient city of Bhaktapur, 'Juju Dhau' (the King of Yogurt) is a thick, creamy, and naturally sweet custard-like yogurt. It is traditionally prepared in clay pots, which help absorb excess moisture to give it its legendary texture.",
+          illustration: "lucide:crown",
           accentColor: "bg-yellow-500",
         },
         {
-          title: "Newari Feast",
+          title: "The Himalayan Kick",
           content:
-            "The Newar community has a rich food culture featuring 'Samay Baji'—a platter of beaten rice, buffalo meat, and various side dishes.",
-          illustration: "lucide:drumstick",
-          accentColor: "bg-rose-500",
+            "Newari and hilly cuisines get their unique 'tingly' kick from Timmur, a wild variety of Sichuan pepper native to the Himalayas. It adds a distinct numbing sensation and citrusy aroma that defines the flavor profile of many local dishes.",
+          illustration: "lucide:sparkles",
+          accentColor: "bg-purple-600",
+        },
+        {
+          title: "Stone-Hard Cheese: Chhurpi",
+          content:
+            "In the Himalayas, yak milk is turned into Chhurpi. The 'hard' variety is famous for being as tough as a stone; you have to suck on a small cube for hours to soften it. It’s a vital source of protein for people living in the cold, high altitudes.",
+          illustration: "lucide:gem",
+          accentColor: "bg-slate-500",
         },
       ],
       culture: [
         {
-          title: "Ethnic Diversity",
+          title: "The Living Goddess",
           content:
-            "Nepal is a beautiful mosaic of over 125 ethnic groups and 123 spoken languages!",
-          illustration: "lucide:users",
-          accentColor: "bg-purple-500",
+            "Nepal is home to the world's only living goddess, the Kumari. Selected as a young girl from the Newari Shakya caste, she is believed to be the incarnation of the goddess Taleju. She resides in the Kumari Ghar in Kathmandu Durbar Square and is worshipped by both Hindus and Buddhists.",
+          illustration: "lucide:star",
+          accentColor: "bg-red-600",
         },
         {
-          title: "Guest is God",
+          title: "A Unique Flag",
           content:
-            "The philosophy of 'Atithi Devo Bhava' means guests are treated as gods in Nepali households.",
+            "The national flag of Nepal is the only non-rectangular national flag in the world. Its unique shape consists of two stacked triangles, representing the Himalayan mountains and the two main religions of the country, Hinduism and Buddhism.",
+          illustration: "lucide:flag",
+          accentColor: "bg-blue-700",
+        },
+        {
+          title: "Etiquette & Greetings",
+          content:
+            "Respect is deeply rooted in Nepali society. The standard greeting is 'Namaste,' performed by joining palms together. While 'K Cha?' is common among close friends, formal situations and elders always require respectful language and traditional greetings.",
+          illustration: "lucide:person-standing",
+          accentColor: "bg-emerald-600",
+        },
+        {
+          title: "National Dress: Daura Suruwal",
+          content:
+            "The Daura Suruwal is the traditional attire for men. The 'Daura' is an upper garment tied with eight strings (representing the eight lucky symbols), and the 'Suruwal' are the trousers. It is almost always paired with a Dhaka Topi, a colorful geometric hat.",
+          illustration: "lucide:shirt",
+          accentColor: "bg-slate-700",
+        },
+        {
+          title: "Diverse Languages",
+          content:
+            "Nepal is a multilingual nation with over 120 spoken languages. While Nepali is the official language and uses the Devanagari script, many communities still actively speak ancestral languages like Maithili, Newari, Tamang, and Sherpa.",
+          illustration: "lucide:languages",
+          accentColor: "bg-indigo-600",
+        },
+        {
+          title: "Festival of Bonds: Bhai Tika",
+          content:
+            "During the Tihar festival (the festival of lights), the final day is called Bhai Tika. It is a beautiful celebration of the bond between brothers and sisters, where sisters apply a multi-colored 'tika' on their brothers' foreheads and pray for their longevity.",
           illustration: "lucide:heart",
           accentColor: "bg-pink-500",
+        },
+        {
+          title: "Soulful Strings: The Sarangi",
+          content:
+            "The Sarangi is the heart of Nepali folk music. This small, four-stringed instrument is carved from a single piece of wood. Traditionally, the Gaine community traveled from village to village, playing the Sarangi and singing songs that told news and historical tales.",
+          illustration: "lucide:music",
+          accentColor: "bg-amber-600",
+        },
+        {
+          title: "Windows to the Past",
+          content:
+            "Newari architecture is famous for its intricate wood carvings. The 'Ankhijhyal' are traditional latticed windows found in the Kathmandu Valley. These windows are so finely carved that they allow people inside to see out, while keeping the interior private from the street.",
+          illustration: "lucide:grid",
+          accentColor: "bg-orange-800",
+        },
+        {
+          title: "Living in the Future",
+          content:
+            "Nepal officially follows the Bikram Sambat (BS) calendar. Because it is a lunar-solar calendar, it is approximately 56 to 57 years ahead of the Gregorian (AD) calendar. This means that while the rest of the world is in one year, Nepal is already celebrating the next century!",
+          illustration: "lucide:calendar",
+          accentColor: "bg-purple-600",
         },
       ],
       flag: [
         {
-          title: "Only Non-Rectangle",
+          title: "The World's Only Non-Rectangular Flag",
           content:
-            "Nepal's flag is the only national flag in the world that isn't a rectangle or a square!",
-          illustration: "twemoji:flag-nepal",
-          accentColor: "bg-rose-600",
+            "Nepal's flag is the only national flag in the world that isn't a rectangle or a square. It is made of two stacked triangles, known as pennons. These triangles are widely recognized as symbols of the towering Himalayan mountain ranges that define the country's landscape.",
+          illustration: "lucide:triangle",
+          accentColor: "bg-red-600",
         },
         {
-          title: "Sun and Moon",
+          title: "Colors of Bravery and Peace",
           content:
-            "The moon represents the cool weather of the Himalayas, while the sun represents the fierce heat of the lower plains.",
+            "The flag features a crimson red body, which is Nepal's national color. It represents the brave spirit of the Nepalese people and the color of the Rhododendron, the national flower. This is surrounded by a deep blue border, symbolizing peace and the harmony Nepal seeks with the world.",
+          illustration: "lucide:palette",
+          accentColor: "bg-blue-700",
+        },
+        {
+          title: "Symbols of the Sky",
+          content:
+            "The flag contains two white celestial symbols. The upper triangle holds a crescent moon with eight rays, representing the calm and soothing nature of the people. The lower triangle features a twelve-rayed sun, symbolizing heat and fierce determination.",
           illustration: "lucide:sun",
-          accentColor: "bg-blue-600",
+          accentColor: "bg-orange-500",
+        },
+        {
+          title: "A Wish for Eternity",
+          content:
+            "The sun and moon together express a powerful hope for the nation. It is a traditional belief and wish that the nation of Nepal will endure and remain prosperous for as long as the sun and moon continue to exist in the sky.",
+          illustration: "lucide:infinity",
+          accentColor: "bg-emerald-600",
+        },
+        {
+          title: "Evolution of the Design",
+          content:
+            "The flag's design has evolved over time. Before 1962, the sun and moon symbols actually included human faces! These were removed during a modernization of the flag's design to create the clean, geometric versions used today.",
+          illustration: "lucide:smile",
+          accentColor: "bg-slate-600",
+        },
+        {
+          title: "Anatomy of the Flag",
+          content:
+            "When looking at the flag from top to bottom, the moon always sits above the sun. From the outside in, you first encounter the blue border of peace, then the crimson field of bravery, and finally the white symbols of eternity at the very heart.",
+          illustration: "lucide:layers",
+          accentColor: "bg-indigo-600",
         },
       ],
       personalities: [
         {
           title: "The Light of Asia",
           content:
-            "Gautam Buddha, the founder of Buddhism, was born in Lumbini, Nepal over 2,500 years ago.",
+            "Siddhartha Gautama, who later became the Buddha, was born in the gardens of Lumbini in southern Nepal around 563 BCE. Known as the 'Light of Asia,' his teachings on peace and enlightenment began in Nepal and spread across the world, making Lumbini one of the most sacred pilgrimage sites on Earth.",
           illustration: "lucide:sparkles",
-          accentColor: "bg-amber-400",
+          accentColor: "bg-amber-500",
         },
         {
-          title: "Tenzing Norgay",
+          title: "Conquerors of the Sky",
           content:
-            "Alongside Edmund Hillary, Sherpa Tenzing Norgay was one of the first humans to reach the summit of Everest.",
+            "In 1953, Tenzing Norgay Sherpa made history alongside Sir Edmund Hillary as the first humans to summit Mt. Everest. Decades later, Pasang Lhamu Sherpa became the first Nepalese woman to reach the peak in 1993, while Kami Rita Sherpa currently holds the world record with over 30 successful ascents.",
           illustration: "lucide:mountain",
-          accentColor: "bg-sky-400",
+          accentColor: "bg-blue-600",
+        },
+        {
+          title: "The God of Sight",
+          content:
+            "Dr. Sanduk Ruit is a world-renowned ophthalmologist who has restored sight to over 130,000 people. He developed a low-cost, high-quality cataract surgery technique that has transformed medical care in developing nations, earning him international acclaim as a 'miracle worker' for the blind.",
+          illustration: "lucide:eye",
+          accentColor: "bg-emerald-600",
+        },
+        {
+          title: "Literary Legends",
+          content:
+            "Bhanubhakta Acharya is celebrated as the 'Adikavi' (First Poet) for translating the Ramayana into Nepali, making literature accessible to everyone. In the modern era, Jhamak Ghimire has inspired millions by winning the Madan Puraskar, Nepal's top literary award, writing powerful books with her left foot due to cerebral palsy.",
+          illustration: "lucide:pen-tool",
+          accentColor: "bg-indigo-700",
+        },
+        {
+          title: "Modern Heroes",
+          content:
+            "Nepal's influence continues through social and athletic leaders. Anuradha Koirala, founder of Maiti Nepal, was named CNN Hero of the Year for her fight against human trafficking. In sports, Paras Khadka is revered as the father of modern Nepal cricket, leading the nation to its first T20 World Cup appearance.",
+          illustration: "lucide:award",
+          accentColor: "bg-rose-600",
+        },
+        {
+          title: "A Journey Through Time",
+          content:
+            "Nepal's history is shaped by diverse icons. From the ancient spiritual guidance of the Buddha (6th Century BCE) to the 13th-century architectural genius Arniko—who brought Nepali styles to China—and finally King Prithvi Narayan Shah, who unified the various kingdoms into modern-day Nepal in the 18th century.",
+          illustration: "lucide:clock",
+          accentColor: "bg-slate-700",
         },
       ],
       politics: [
         {
-          title: "From Crown to Republic",
+          title: "A New Chapter: The Federal Republic",
           content:
-            "Nepal transitioned from a long-standing Monarchy to a Federal Democratic Republic in 2008.",
-          illustration: "lucide:building-2",
-          accentColor: "bg-slate-700",
+            "In 2008, Nepal underwent a historic transformation, moving from a 240-year-old monarchy to a Federal Democratic Republic. This change was officially declared on May 28, 2008, ending the Shah dynasty and establishing a system where power is held by the people and their elected representatives.",
+          illustration: "lucide:landmark",
+          accentColor: "bg-red-700",
         },
         {
-          title: "Federal Structure",
+          title: "The People's Constitution",
           content:
-            "Today, Nepal is divided into 7 provinces, each with its own local government to better serve the people.",
-          illustration: "lucide:layers",
-          accentColor: "bg-slate-500",
+            "The current Constitution of Nepal was adopted on September 20, 2015 (Ashoj 3, 2072 BS). It is a landmark document because it is the first constitution written by the people's representatives. It defines Nepal as a secular, federal state that protects religious and cultural freedom for all citizens equally.",
+          illustration: "lucide:book-text",
+          accentColor: "bg-blue-600",
+        },
+        {
+          title: "The Seven Provinces",
+          content:
+            "To decentralize power, the 2015 Constitution divided Nepal into 7 distinct provinces: Koshi, Madhesh, Bagmati, Gandaki, Lumbini, Karnali, and Sudurpashchim. This federal structure ensures that governance is closer to the people, moving away from a centralized system in Kathmandu.",
+          illustration: "lucide:map",
+          accentColor: "bg-emerald-600",
+        },
+        {
+          title: "Three Tiers of Government",
+          content:
+            "Nepal operates under a three-tier government structure: the Federal Government at the center, 7 Provincial Governments, and 753 Local Governments. Local units include 'Gaunpalikas' (Rural Municipalities) for countryside areas and various levels of Municipalities for urban centers.",
+          illustration: "lucide:network",
+          accentColor: "bg-indigo-600",
+        },
+        {
+          title: "Leadership and Lawmaking",
+          content:
+            "Nepal follows a parliamentary system where roles are divided. The President serves as the ceremonial Head of State, while the Prime Minister holds executive power as the Head of Government. The House of Representatives (Lower House) consists of 275 members elected through a mix of direct and proportional voting.",
+          illustration: "lucide:gavel",
+          accentColor: "bg-amber-600",
+        },
+        {
+          title: "Evolution of Governance",
+          content:
+            "Nepal's political journey has seen many eras. It moved from the hereditary Rana Regime (an oligarchy that ended in 1951) to the partyless Panchayat System (1960–1990), and finally to the modern Federal Republic. Today, every citizen aged 18 and older has the right to vote and shape the nation's future.",
+          illustration: "lucide:clock-9",
+          accentColor: "bg-slate-700",
         },
       ],
       modern: [
         {
-          title: "The Tech Surge",
+          title: "The Digital Wallet Revolution",
           content:
-            "Kathmandu is becoming a hub for IT services and software development in South Asia.",
-          illustration: "lucide:smartphone",
-          accentColor: "bg-cyan-500",
+            "Nepal has seen a massive shift toward a cashless economy. While the country is still growing its first tech 'Unicorn' (a company valued at $1 billion), platforms like eSewa and Khalti have changed how people pay. Today, Fonepay is the largest network, connecting almost every bank and shop through instant QR code payments.",
+          illustration: "lucide:qr-code",
+          accentColor: "bg-emerald-500",
         },
         {
-          title: "Clean Energy",
+          title: "Nepal in Space",
           content:
-            "With its massive river systems, Nepal is rapidly expanding its hydroelectric power to provide clean energy to the region.",
+            "In April 2019, Nepal reached a celestial milestone with the launch of NepaliSat-1. This nanosatellite marked the nation's official entry into space technology, opening new doors for research and scientific development in the Himalayas and beyond.",
+          illustration: "lucide:satellite",
+          accentColor: "bg-indigo-900",
+        },
+        {
+          title: "Smart Transport and Delivery",
+          content:
+            "Urban life in Nepal has been transformed by home-grown and regional tech apps. Pathao and Tootle revolutionized transport by using motorcycles to beat Kathmandu’s famous traffic, while Foodmandu pioneered the food delivery industry, bringing restaurant meals to doorsteps across major cities.",
+          illustration: "lucide:bike",
+          accentColor: "bg-rose-500",
+        },
+        {
+          title: "The Speed of Light",
+          content:
+            "Nepal’s connectivity has evolved rapidly in just a few decades. The country moved from slow dial-up connections in the 1990s to ADSL/Broadband in the 2000s. Today, Fiber to the Home (FTTH) is the standard in urban areas, providing high-speed internet that fuels the growing tech hub status of cities like Kathmandu and Pokhara.",
           illustration: "lucide:zap",
-          accentColor: "bg-emerald-400",
+          accentColor: "bg-sky-500",
+        },
+        {
+          title: "Resilience and Reconstruction",
+          content:
+            "A major symbol of modern Nepal’s resilience is the Dharahara tower. After the devastating 2015 earthquake, a new, modern version of the tower was built and inaugurated in 2021. It stands as a testament to the country’s ability to rebuild and modernize while honoring its historic past.",
+          illustration: "lucide:tower-control",
+          accentColor: "bg-slate-600",
+        },
+        {
+          title: "Global Stage: Arts and Sports",
+          content:
+            "Modern Nepal is making its mark globally. In 2019, the country successfully hosted the 13th South Asian Games, finishing second in total medals. Meanwhile, in the arts, filmmakers like Fidel Devkota are reaching prestigious stages like the Venice Film Festival, showcasing Nepali stories to the world.",
+          illustration: "lucide:trophy",
+          accentColor: "bg-amber-500",
         },
       ],
       nature: [
         {
-          title: "One-Horned Rhino",
+          title: "National Symbols of Nature",
           content:
-            "Nepal is one of the few places on Earth where you can see the rare Greater One-horned Rhinoceros in the wild.",
-          illustration: "lucide:paw-print",
-          accentColor: "bg-green-700",
+            "Nepal’s identity is deeply tied to its natural world. The Lali Gurans (Rhododendron) is the national flower, painting the hills bright red every spring. High in the mountains, the Himalayan Monal (Danphe) serves as the national bird with its stunning multicolored feathers, while the Cow is revered as the national animal.",
+          illustration: "lucide:flower-2",
+          accentColor: "bg-red-600",
         },
         {
-          title: "The Red Panda",
+          title: "Ghosts of the Mountains",
           content:
-            "In the high-altitude bamboo forests, you might find the shy and adorable Red Panda!",
+            "The high-altitude rocky terrain of the Himalayas is home to the elusive Snow Leopard, often called the 'Ghost of the Mountains' due to its incredible camouflage. These peaks also support the Wild Yak, an animal specifically adapted to survive in the freezing, thin air of the alpine zones.",
+          illustration: "lucide:mountain-snow",
+          accentColor: "bg-slate-400",
+        },
+        {
+          title: "Jungle Giants and Rhinos",
+          content:
+            "In the hot plains of the Terai, Nepal has achieved world-renowned success in conservation. Parks like Chitwan and Bardia are among the last strongholds for the Greater One-horned Rhinoceros. These jungles are also the primary habitat for the Bengal Tiger, which roams the subtropical grasslands.",
+          illustration: "lucide:shield",
+          accentColor: "bg-emerald-700",
+        },
+        {
+          title: "The Rare and Endemic",
+          content:
+            "Nepal is a sanctuary for rare species. The Spiny Babbler (Kaande Bhyakur) is the only bird found naturally nowhere else on Earth. Meanwhile, the bamboo forests of the mid-hills provide a home for the shy, reddish-brown Red Panda, an endangered species known for its bear-like face and cat-like agility.",
           illustration: "lucide:clover",
-          accentColor: "bg-orange-600",
+          accentColor: "bg-orange-700",
+        },
+        {
+          title: "A Birder's Paradise",
+          content:
+            "Despite its small size, Nepal is home to over 850 bird species—nearly 10% of the world's total. This incredible diversity ranges from massive Himalayan vultures circling the peaks to tiny, colorful sunbirds flitting through the tropical river valleys.",
+          illustration: "lucide:bird",
+          accentColor: "bg-sky-600",
+        },
+        {
+          title: "River Residents",
+          content:
+            "Nepal's freshwater systems host unique reptiles like the Gharial, a fish-eating crocodile with a distinctively long, thin snout. Because they are critically endangered, Nepal operates dedicated breeding centers in Chitwan to ensure these prehistoric-looking creatures survive for future generations.",
+          illustration: "lucide:waves",
+          accentColor: "bg-teal-600",
         },
       ],
       festivals: [
         {
-          title: "Dashain & Tihar",
+          title: "The Grand Festivals: Dashain & Tihar",
           content:
-            "Dashain is the longest festival, celebrating the victory of good over evil. Tihar is the festival of lights and flowers.",
-          illustration: "lucide:sparkle",
-          accentColor: "bg-pink-600",
+            "Nepal’s calendar is defined by its two biggest festivals. Dashain, lasting 15 days, celebrates the victory of Goddess Durga over evil and is a time for family reunions and receiving 'Tika' blessings. Tihar, the festival of lights, uniquely honors animals over five days—including crows, dogs (Kukur Tihar), and cows—culminating in Bhai Tika to celebrate the bond between siblings.",
+          illustration: "lucide:award",
+          accentColor: "bg-orange-600",
         },
         {
-          title: "Holi",
+          title: "Sacred Spaces of Kathmandu",
           content:
-            "Just like the diverse culture, Holi in Nepal is a vibrant explosion of colors and water to celebrate spring!",
+            "The Kathmandu Valley is a treasure trove of ancient spirituality. Pashupatinath Temple, dedicated to Lord Shiva, is one of the holiest Hindu sites in the world. Nearby, the hilltop Swayambhunath Stupa (popularly known as the 'Monkey Temple') and the massive Boudhanath Stupa serve as central pillars of Himalayan Buddhism.",
+          illustration: "lucide:shrine",
+          accentColor: "bg-amber-700",
+        },
+        {
+          title: "The Living Goddess",
+          content:
+            "A tradition unique to Nepal is the worship of the Kumari—the world's only living goddess. Selected as a young girl from the Shakya community, she is believed to be the reincarnation of the goddess Taleju and lives in a beautiful palace in Kathmandu's Basantapur Durbar Square until she reaches puberty.",
+          illustration: "lucide:gem",
+          accentColor: "bg-rose-700",
+        },
+        {
+          title: "Buddha’s Birthplace",
+          content:
+            "Lumbini, located in the Terai plains, is the sacred birthplace of Gautama Buddha. Every year, Buddha Jayanti celebrates his birth, enlightenment, and death. Spiritual energy here is symbolized by colorful Buddhist prayer flags, whose five colors represent the elements—blue (sky), white (air), red (fire), green (water), and yellow (earth).",
+          illustration: "lucide:sun",
+          accentColor: "bg-sky-500",
+        },
+        {
+          title: "Vibrant Spring: Holi",
+          content:
+            "Holi, the 'Festival of Colors,' marks the arrival of spring. It is a day of pure joy where people throw colored powders (Abir) and water at each other, symbolizing the triumph of spring over winter and the breaking down of social barriers through shared celebration.",
           illustration: "lucide:palette",
-          accentColor: "bg-violet-500",
+          accentColor: "bg-fuchsia-500",
+        },
+        {
+          title: "Spirituality Across Altitudes",
+          content:
+            "Spirituality in Nepal scales the heights of the landscape. From the peaceful gardens of Lumbini in the lowlands to the ancient stupas of the Kathmandu Valley, and up to high-altitude pilgrimage sites like Muktinath in Mustang (3,710m), the search for the divine is woven into every elevation of the country.",
+          illustration: "lucide:trending-up",
+          accentColor: "bg-indigo-600",
         },
       ],
     },
@@ -4379,45 +4701,73 @@ export const chapters = [
         {
           title: "Diverse Landscapes",
           content:
-            "From the frozen tundra of Alaska to the tropical beaches of Florida, the USA spans nearly every climate found on Earth.",
+            "From the frozen tundra of Alaska to the tropical beaches of Florida, the USA spans nearly every climate found on Earth, consisting of 50 unique states.",
           illustration: "lucide:map",
           accentColor: "bg-blue-500",
         },
         {
           title: "The Grand Canyon",
           content:
-            "Carved by the Colorado River, this massive canyon in Arizona is one of the world's most famous natural wonders.",
-          illustration: "lucide:aperture",
+            "Carved by the Colorado River over millions of years, this massive canyon in Arizona is one of the world's most famous natural wonders.",
+          illustration: "lucide:sun",
           accentColor: "bg-orange-600",
         },
         {
           title: "Major Waterways",
           content:
-            "The Mississippi-Missouri river system forms one of the longest and most important commercial waterways in the world.",
+            "The Mississippi-Missouri river system forms the longest commercial waterway in the US, while the Great Lakes hold 20% of the world's fresh surface water.",
           illustration: "lucide:waves",
           accentColor: "bg-cyan-600",
+        },
+        {
+          title: "Mountain Peaks",
+          content:
+            "Denali in Alaska, formerly known as Mount McKinley, stands at 20,310 feet, making it the highest peak in North America.",
+          illustration: "lucide:mountain-snow",
+          accentColor: "bg-slate-500",
+        },
+        {
+          title: "Extreme Points",
+          content:
+            "Death Valley's Badwater Basin is the lowest and hottest point in North America, sitting at 282 feet below sea level in the Mojave Desert.",
+          illustration: "lucide:thermometer-sun",
+          accentColor: "bg-red-500",
         },
       ],
       modern: [
         {
           title: "Silicon Valley",
           content:
-            "Located in California, this region is the global headquarters for tech giants like Apple, Google, and Meta.",
+            "Located in California, this region is the global headquarters for tech giants like Apple and Google, leading the world in semiconductor and software innovation.",
           illustration: "lucide:cpu",
           accentColor: "bg-indigo-500",
         },
         {
-          title: "Space Exploration",
+          title: "Space City",
           content:
-            "The USA was the first nation to land humans on the moon and continues to lead in space through NASA and SpaceX.",
+            "Houston, Texas, is home to NASA's Mission Control. Private companies like SpaceX have recently joined NASA in pioneering reusable rocket technology.",
           illustration: "lucide:rocket",
           accentColor: "bg-slate-800",
         },
         {
-          title: "Entertainment Hub",
+          title: "Aviation & Communication",
           content:
-            "Hollywood and the American music industry influence global pop culture, from blockbuster movies to digital streaming.",
-          illustration: "lucide:film",
+            "From the Wright Brothers' first flight in North Carolina to the development of the Internet by the Department of Defense, the US has a rich history of connecting the world.",
+          illustration: "lucide:plane",
+          accentColor: "bg-sky-500",
+        },
+        {
+          title: "Industrial Agriculture",
+          content:
+            "The United States is the world's largest producer of corn, utilizing high-tech industrial farming throughout the Midwestern 'Corn Belt.'",
+          illustration: "lucide:wheat",
+          accentColor: "bg-yellow-600",
+        },
+        {
+          title: "Entertainment & Culture",
+          content:
+            "From the opening of Disneyland in 1955 to Austin's SXSW festival, American entertainment and tech festivals remain central to global pop culture.",
+          illustration: "lucide:sparkles",
           accentColor: "bg-pink-500",
         },
       ],
@@ -4439,9 +4789,58 @@ export const chapters = [
         {
           title: "Bison of the Plains",
           content:
-            "The American Bison is the national mammal and was once the primary source of life for many Indigenous tribes.",
+            "The American Bison is the national mammal and the largest land mammal in North America, weighing up to 2,000 pounds.",
           illustration: "lucide:paw-print",
-          accentColor: "bg-brown-600",
+          accentColor: "bg-orange-900",
+        },
+        {
+          title: "The General Sherman",
+          content:
+            "Located in Sequoia National Park, this giant sequoia is the world's largest known living single-stem tree by volume.",
+          illustration: "lucide:mountain",
+          accentColor: "bg-green-700",
+        },
+        {
+          title: "Everglades Ecosystem",
+          content:
+            "Southern Florida is the only place on Earth where both American Alligators and American Crocodiles coexist in the wild.",
+          illustration: "lucide:waves",
+          accentColor: "bg-teal-600",
+        },
+        {
+          title: "North American Speedsters",
+          content:
+            "The Pronghorn Antelope is the fastest land animal in North America, reaching speeds up to 55 mph.",
+          illustration: "lucide:zap",
+          accentColor: "bg-yellow-600",
+        },
+        {
+          title: "Hoodoos of Bryce",
+          content:
+            "Utah's Bryce Canyon features the world's largest concentration of hoodoos—tall, thin spires of vibrant orange rock.",
+          illustration: "lucide:rocking-chair",
+          accentColor: "bg-orange-600",
+        },
+        {
+          title: "The Venus Flytrap",
+          content:
+            "This carnivorous plant is native only to a small 75-mile radius in the wetlands of North and South Carolina.",
+          illustration: "lucide:flower",
+          accentColor: "bg-lime-600",
+        },
+        {
+          title: "Mammoth Cave",
+          content:
+            "Located in Kentucky, this is the world's longest cave system with over 400 miles of explored passageways.",
+          illustration: "lucide:layout-grid",
+          accentColor: "bg-slate-700",
+        },
+        {
+          title: "Diverse Ecosystems",
+          content:
+            "US climates vary wildly, from the parched Mojave Desert to the soaking Olympic Temperate Rainforest in Washington.",
+          illustration: "lucide:cloud-rain",
+          accentColor: "bg-blue-600",
         },
       ],
       festivals: [
@@ -4449,22 +4848,71 @@ export const chapters = [
           title: "Independence Day",
           content:
             "Celebrated on July 4th, Americans honor the nation's birth with massive firework displays, parades, and barbecues.",
-          illustration: "lucide:sparkles",
+          illustration: "lucide:flag",
           accentColor: "bg-red-600",
+        },
+        {
+          title: "Holiday Traditions",
+          content:
+            "The American calendar follows a seasonal rhythm: Independence Day (July), Halloween (October), and Thanksgiving (November).",
+          illustration: "lucide:calendar",
+          accentColor: "bg-blue-700",
+        },
+        {
+          title: "MLK Jr. Day",
+          content:
+            "Observed on the third Monday of January, this day honors the civil rights leader who dreamt of racial equality.",
+          illustration: "lucide:heart",
+          accentColor: "bg-indigo-600",
         },
         {
           title: "Thanksgiving",
           content:
-            "A uniquely North American holiday where families gather for a large feast to express gratitude for the year's harvest.",
+            "Observed on the fourth Thursday of November, families gather to express gratitude and enjoy a traditional feast.",
           illustration: "lucide:pie-chart",
           accentColor: "bg-orange-500",
+        },
+        {
+          title: "New Year's Eve",
+          content:
+            "Since 1907, millions have watched the iconic 'Ball Drop' in New York City's Times Square to count down to midnight.",
+          illustration: "lucide:timer",
+          accentColor: "bg-purple-500",
+        },
+        {
+          title: "Seasonal Milestones",
+          content:
+            "Major holidays mark the seasons: Memorial Day starts summer, Labor Day ends it, and Christmas arrives in winter.",
+          illustration: "lucide:cloud-sun",
+          accentColor: "bg-sky-500",
         },
         {
           title: "Mardi Gras",
           content:
             "Famous in New Orleans, this vibrant carnival involves masks, jazz music, and colorful parades before the season of Lent.",
-          illustration: "lucide:music",
+          illustration: "lucide:drama",
           accentColor: "bg-purple-600",
+        },
+        {
+          title: "The National Mall",
+          content:
+            "Not a shopping center, this DC park is a historic space housing the Lincoln Memorial and Smithsonian museums.",
+          illustration: "lucide:landmark",
+          accentColor: "bg-stone-600",
+        },
+        {
+          title: "Statue of Liberty",
+          content:
+            "A gift from France in 1886, she stands in New York Harbor as a universal symbol of freedom and democracy.",
+          illustration: "lucide:shrine",
+          accentColor: "bg-cyan-600",
+        },
+        {
+          title: "Presidential History",
+          content:
+            "The nation's leadership spans centuries, from George Washington (1789) to Abraham Lincoln (1861) and John F. Kennedy (1961).",
+          illustration: "lucide:users",
+          accentColor: "bg-slate-800",
         },
       ],
     },
@@ -4476,92 +4924,120 @@ export const chapters = [
         {
           title: "The Archipelago",
           content:
-            "Japan is a volcanic island chain made of four main islands: Honshu, Hokkaido, Kyushu, and Shikoku.",
+            "Japan is a volcanic island chain made of four main islands: Honshu, Hokkaido, Kyushu, and Shikoku. Honshu is the largest and most populous island.",
           illustration: "lucide:map",
           accentColor: "bg-blue-400",
         },
         {
-          title: "Mount Fuji",
+          title: "Land of Mountains",
           content:
-            "An active volcano and a sacred symbol, Mount Fuji is the highest peak in Japan and a UNESCO World Heritage site.",
+            "Roughly 70-80% of Japan is mountainous. This includes the famous Japanese Alps on the island of Honshu and the highest peak, Mount Fuji, a sacred volcano standing at 3,776 meters.",
           illustration: "lucide:mountain",
           accentColor: "bg-slate-400",
         },
         {
-          title: "Tectonic Activity",
+          title: "The Ring of Fire",
           content:
-            "Located on the Ring of Fire, Japan experiences frequent earthquakes and is home to over 100 active volcanoes.",
+            "Located on the Ring of Fire, Japan experiences frequent earthquakes and volcanic activity. To the west, the Sea of Japan separates the islands from the Asian continent.",
           illustration: "lucide:flame",
-          accentColor: "bg-red-500",
+          accentColor: "bg-orange-500",
+        },
+        {
+          title: "Seasons & Cities",
+          content:
+            "Japan is famous for Spring cherry blossoms (Sakura). Major cities stretch from Sapporo in the north to Tokyo in the center, down to Fukuoka in the south.",
+          illustration: "lucide:flower",
+          accentColor: "bg-pink-400",
         },
       ],
       history: [
         {
-          title: "The Samurai Era",
+          title: "The Samurai & Shoguns",
           content:
-            "For centuries, Japan was ruled by powerful military warriors called Samurai who lived by the code of Bushido.",
-          illustration: "lucide:sword",
+            "Samurai were the warrior nobility of feudal Japan following the code of Bushido. In the 1600s, Tokugawa Ieyasu founded a Shogunate that unified and ruled Japan for 250 years.",
+          illustration: "lucide:shield",
           accentColor: "bg-stone-700",
         },
         {
-          title: "Edo Period",
+          title: "Isolation & Capitals",
           content:
-            "Japan remained closed to the outside world for over 200 years during the Edo period, fostering a unique and isolated culture.",
+            "During the Edo period, the 'Sakoku' policy closed Japan to foreigners for 200 years. Throughout history, the capital moved from Nara to Kyoto, and finally to Tokyo.",
           illustration: "lucide:scroll",
           accentColor: "bg-amber-700",
         },
         {
           title: "The Meiji Restoration",
           content:
-            "In 1868, Japan rapidly modernized and westernized, transforming from a feudal society into a global power.",
-          illustration: "lucide:landmark",
-          accentColor: "bg-red-800",
+            "In 1868, the Meiji Restoration restored power to the Emperor and abolished the Samurai class to rapidly modernize the nation into a global power.",
+          illustration: "lucide:cog",
+          accentColor: "bg-blue-900",
+        },
+        {
+          title: "Modern Milestones",
+          content:
+            "The traditional Kimono has been worn since the Heian period. In 1964, the Tokyo Olympics signaled Japan's full return to the global stage after WWII.",
+          illustration: "lucide:trophy",
+          accentColor: "bg-yellow-600",
         },
       ],
       food: [
         {
-          title: "Sushi & Sashimi",
+          title: "Miso & Umami",
           content:
-            "World-famous Japanese cuisine focuses on fresh, seasonal ingredients and the precise preparation of raw fish.",
-          illustration: "lucide:fish",
+            "Miso soup is made from fermented soybeans. It is a staple of the Japanese diet, rich in 'Umami'—the savory fifth basic taste found in soy sauce and seaweed.",
+          illustration: "lucide:soup",
+          accentColor: "bg-amber-600",
+        },
+        {
+          title: "Fish: Sushi & Sashimi",
+          content:
+            "Sushi features vinegar-flavored rice, while Sashimi is simply thinly sliced raw fish. Wasabi, which thrives in cold mountain streams, is a common pairing.",
+          illustration: "lucide:slice",
           accentColor: "bg-rose-500",
         },
         {
-          title: "Ramen Culture",
+          title: "Noodle Culture",
           content:
-            "What started as street food has become a culinary art, with each region of Japan having its own secret broth recipe.",
-          illustration: "lucide:soup",
-          accentColor: "bg-yellow-600",
+            "Ramen uses wheat noodles, while Soba uses buckwheat. In Japan, slurping your noodles is polite—it shows you enjoy the meal and helps cool the food.",
+          illustration: "lucide:wind",
+          accentColor: "bg-yellow-500",
         },
         {
-          title: "Matcha Tea",
+          title: "Tea & Street Food",
           content:
-            "The traditional tea ceremony is a spiritual practice centered on the preparation and drinking of powdered green tea.",
-          illustration: "lucide:leaf",
+            "Tea ranges from Sencha (green) to Matcha (powdered) and Hojicha (roasted). Popular snacks include Takoyaki (octopus balls) and Edamame (soybeans).",
+          illustration: "lucide:circle",
           accentColor: "bg-emerald-500",
         },
       ],
       culture: [
         {
-          title: "Shinto & Buddhism",
+          title: "Spirituality & Etiquette",
           content:
-            "Japanese spirituality is a blend of Shinto (belief in nature spirits) and Zen Buddhism (focus on meditation).",
+            "Shinto is an indigenous religion focused on nature spirits. Respect is shown through 'Ojigi' (bowing), the standard greeting for thanks or apologies.",
           illustration: "lucide:shrine",
-          accentColor: "bg-orange-600",
+          accentColor: "bg-red-500",
         },
         {
-          title: "Anime & Manga",
+          title: "Arts & Entertainment",
           content:
-            "Modern Japan is a global leader in animation and comic arts, influencing pop culture worldwide.",
-          illustration: "lucide:palette",
-          accentColor: "bg-violet-500",
+            "Japan is home to Origami (paper folding), Manga (comics), and Anime (animation). Global icons include Hello Kitty (1974), Mario (1981), and Pokémon (1996).",
+          illustration: "lucide:shapes",
+          accentColor: "bg-purple-500",
         },
         {
-          title: "Omotenashi",
+          title: "Martial Arts & Music",
           content:
-            "The Japanese philosophy of 'wholehearted hospitality' means anticipating a guest's needs before they even arise.",
-          illustration: "lucide:heart",
-          accentColor: "bg-pink-400",
+            "Martial arts range from grappling (Judo/Aikido) to striking (Karate). Traditional music often features the three-stringed Shamisen.",
+          illustration: "lucide:music",
+          accentColor: "bg-indigo-500",
+        },
+        {
+          title: "Lifestyle & Holidays",
+          content:
+            "The Ghibli Museum celebrates modern animation. For holidays, 'Golden Week' is a famous series of four national holidays occurring within one week.",
+          illustration: "lucide:calendar",
+          accentColor: "bg-orange-400",
         },
       ],
     },

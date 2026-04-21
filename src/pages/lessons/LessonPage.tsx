@@ -47,7 +47,6 @@ const LessonPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 pb-32">
-      {/* Header */}
       <header className="sticky top-0 z-20 bg-white border-b-2 border-slate-200 p-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <button
@@ -67,7 +66,7 @@ const LessonPage: React.FC = () => {
               {lessonId}
             </h1>
           </div>
-          <div className="w-10" /> {/* Spacer for symmetry */}
+          <div className="w-10" />
         </div>
       </header>
 

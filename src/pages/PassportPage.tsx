@@ -7,15 +7,10 @@ import { countries } from "../utils/lesson";
 
 const PassportPage: React.FC = () => {
   const navigate = useNavigate();
-  const { unlockedLessons, hearts } = useStore();
-
-  // Mock data for Streak/XP - Replace with store values if available
-  const streak = 5;
-  const totalXp = 1250;
+  const { unlockedLessons, hearts, xp, streak } = useStore();
 
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col font-sans">
-      {/* 1. DYNAMIC HEADER */}
       <header className="bg-white border-b-2 border-stone-200 px-6 py-4 sticky top-0 z-50">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <button
@@ -32,7 +27,7 @@ const PassportPage: React.FC = () => {
               {streak}
             </div>
             <div className="flex items-center gap-2 font-black text-yellow-500">
-              <Icon icon="carbon:growth" /> {totalXp}
+              <Icon icon="carbon:growth" /> {xp}
             </div>
             <div className="flex items-center gap-2 font-black text-rose-500">
               <Icon icon="twemoji:red-heart" /> {hearts}
@@ -42,7 +37,6 @@ const PassportPage: React.FC = () => {
       </header>
 
       <main className="grow p-6 md:p-12 flex flex-col items-center">
-        {/* 2. MASCOT SECTION */}
         <div className="max-w-2xl w-full flex items-center gap-6 mb-12">
           <motion.div
             animate={{ y: [0, -10, 0] }}
@@ -57,7 +51,6 @@ const PassportPage: React.FC = () => {
           </motion.div>
 
           <div className="relative bg-white border-4 border-stone-200 p-6 rounded-4xl rounded-bl-none shadow-[0_6px_0_0_rgba(231,229,228,1)]">
-            {/* Speech Bubble Arrow */}
             <div className="absolute bottom-0 -left-4 w-0 h-0 border-t-15 border-t-transparent border-r-20 border-r-stone-200 border-b-0 border-b-transparent"></div>
             <div className="absolute bottom-1 -left-2 w-0 h-0 border-t-12 border-t-transparent border-r-18 border-r-white border-b-0 border-b-transparent z-10"></div>
 
@@ -68,9 +61,7 @@ const PassportPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 3. THE PASSPORT OBJECT */}
         <div className="max-w-md w-full relative">
-          {/* Creative Decorations: Travel Stickers behind the passport */}
           <Icon
             icon="emojione:airplane"
             className="absolute -top-10 -right-10 text-6xl opacity-20 -rotate-12"
@@ -82,7 +73,6 @@ const PassportPage: React.FC = () => {
 
           <div className="bg-[#3a5a40] rounded-[2.5rem] p-1 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-b-12 border-[#2d4632]">
             <div className="bg-[#3a5a40] rounded-4xl p-8 border-2 border-[#4f7a57] text-center text-stone-200 relative overflow-hidden">
-              {/* Decorative Gold Leaf Patterns */}
               <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                 <Icon
                   icon="gis:world-map"
@@ -104,7 +94,6 @@ const PassportPage: React.FC = () => {
             </div>
 
             <div className="bg-[#f4ebd0] m-3 rounded-3xl p-6 min-h-100 grid grid-cols-2 gap-4 relative shadow-inner">
-              {/* Subtle Paper Texture Overlay */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
 
               {countries.map((country) => {
@@ -163,69 +152,3 @@ const PassportPage: React.FC = () => {
 };
 
 export default PassportPage;
-// import React from "react";
-// import { motion } from "framer-motion";
-// import { Icon } from "@iconify/react";
-// import { useStore } from "../store/useStore";
-// import { countries } from "../utils/lesson";
-
-// const PassportPage: React.FC = () => {
-//   const { unlockedLessons } = useStore(); // Assuming your store tracks this
-
-//   return (
-//     <div className="min-h-screen bg-stone-100 p-8 flex flex-col items-center">
-//       <div className="max-w-md w-full bg-[#3a5a40] rounded-3xl p-1 shadow-2xl border-b-8 border-[#2d4632]">
-//         <div className="bg-[#3a5a40] rounded-2xl p-8 border-2 border-[#4f7a57] text-center text-stone-200">
-//           <Icon
-//             icon="lucide:book"
-//             className="text-6xl mx-auto mb-4 opacity-50"
-//           />
-//           <h1 className="text-3xl font-black uppercase tracking-[0.2em]">
-//             Passport
-//           </h1>
-//           <p className="text-xs font-bold opacity-70">Republic of Learning</p>
-//         </div>
-
-//         <div className="bg-[#f4ebd0] m-2 rounded-xl p-6 min-h-100 grid grid-cols-2 gap-6 relative">
-//           {countries.map((country) => {
-//             const isMastered =
-//               unlockedLessons[country.id]?.length === country.lessons.length;
-
-//             return (
-//               <motion.div
-//                 key={country.id}
-//                 initial={
-//                   isMastered ? { scale: 0, rotate: -20 } : { opacity: 0.3 }
-//                 }
-//                 animate={
-//                   isMastered ? { scale: 1, rotate: 10 } : { opacity: 0.3 }
-//                 }
-//                 className="flex flex-col items-center justify-center border-2 border-dashed border-stone-400 rounded-xl p-4 grayscale-0"
-//               >
-//                 {isMastered ? (
-//                   <div className="relative group">
-//                     <Icon
-//                       icon={country.stampIcon}
-//                       className="text-7xl drop-shadow-md"
-//                     />
-//                     <div className="absolute inset-0 bg-blue-500/20 mix-blend-color rounded-full pointer-events-none" />
-//                     <p className="mt-2 font-black text-[10px] text-stone-600 uppercase text-center">
-//                       Visited: {new Date().toLocaleDateString()}
-//                     </p>
-//                   </div>
-//                 ) : (
-//                   <Icon
-//                     icon="lucide:lock"
-//                     className="text-4xl text-stone-300"
-//                   />
-//                 )}
-//               </motion.div>
-//             );
-//           })}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PassportPage;
